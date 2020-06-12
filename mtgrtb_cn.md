@@ -62,6 +62,8 @@ Rewarded video 和 Interstitial video 可支持多种视频模板，建议 DSP �
 视频模板即播放视频的UI样式。MTG ADX支持多种视频模板，以供广告主根据产品特性选择最优的模板进行投放。
 MTG ADX现阶段支持的模板如下：
 
+<img src="v1.jpg" width="500px" />
+
 ![V1-视频居中播放|背景黑屏](v1.jpg)
 ![V2-视频居中播放|毛玻璃背景](v2.jpg)
 ![V3-上方显示视频|下方显示卡片](v3.jpg)
