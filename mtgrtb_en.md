@@ -54,8 +54,8 @@
 
 ## nurl和展示监测链接说明
 
-DSP在bidresponse中向MTG ADX返回nurl和展示监测链接（其中，展示监测链接可选，DSP可不返回）。
-当广告成功在客户端展示时，MTG ADX向DSP同时调nurl和展示监测链接。
+DSP return nURL and impression tracking URLs in bidResponse.
+MTG ADX fired all the URLs when an ad is successfully displayed in client. 
 
 ### 展示监测链接返回说明
 
