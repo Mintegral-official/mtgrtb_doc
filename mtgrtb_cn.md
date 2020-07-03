@@ -1,4 +1,5 @@
 
+[TOC]
 
 # Mintegral Adx对接文档
 
@@ -73,7 +74,9 @@ MTG ADX现阶段支持的模板如下：
 
 ## 视频模板的协议和逻辑说明
 
-1. 请求逻辑：若DSP支持视频模板优选逻辑，那么MTG ADX在发起广告请求时，将带上bidrequest.imp.video.ext.videotemplate这个字段，
+视频模板是可选逻辑，可不实现
+
+1. 请求逻辑：若DSP支持视频模板优选逻辑，MTG ADX在发起广告请求时，将带上bidrequest.imp.video.ext.videotemplate这个字段，
 字段类型为object array，每个 object 代表可支持的一个模板。videotemplate object的结构和说明如下： 重点说明：若DSP使用视频模板功能，
 则直接根据videotemplate object的视频宽高或横竖屏要求筛选视频（不再根据video object的宽高筛选视频）。
 
@@ -469,8 +472,8 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
  | id |      string  | 是|         MintegralADX提供的bidrequest唯一标识|
  | imp| object array | 是 |一次请求包含一个或以上的impressionobject；每个impressionobject代表一个广告位的请求；具体见imp参数说明 |
  | ~~site~~  |     object     |   否    |     定义site信息|
- | app     | object     |   是      |   定义app信息；具体见[Object App参数说明](#frc8_13)|
- | device  | object     |   是      |   定义设备信息；具体见[Object Device参数说明](#frc8_15)|
+ | app     | object     |   是      |   定义app信息；具体见[Object App参数说明](#object-app)|
+ | device  | object     |   是      |   定义设备信息；具体见[Object Device参数说明](#object-device)|
  | ~~user~~| object     |   否 |    定义用户信息|
  | ~~test~~| integer    |    否|    是否为测试模式|
  | at      |   integer    |    是|   拍卖结算类型，值为1表示一价结算，值为2表示二价结算；|
@@ -484,7 +487,7 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
  | badv    |  string array|  否|    广告主域名黑名单|
  | bapp    |  string array|  否|     App类广告包名黑名单;  安卓示例 com.amazon.mShop; ios示例：*907394059*
  | ~~source~~|  object|   否 |   ~~流量来源信息~~ |
- | regs    | object  |  否 |     政策法规要求；具体见[Object Regs](#frc8_17) |
+ | regs    | object  |  否 |     政策法规要求；具体见[Object Regs](#object-regs) |
 
 ### Object：Imp
 
@@ -560,10 +563,10 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
 
 | 参数名称	| 类型 |	是否必传	| 描述 |
 |---|---|---|---|
-| request | string | 是 |  表示 Native Ad Specification 定义的 native 标签协议； 具体见下文的 [NativeRequest 参数说明](#frc8_6)
+| request | string | 是 |  表示 Native Ad Specification 定义的 native 标签协议； 具体见下文的 [NativeRequest 参数说明](#object-nativerequest)
 |ver |                 string        |  否        | 采用的 Dynamic Native Ads API 的版本|
-|api |     integer array  | 否 |        该次展示可支持的 API 框架；枚举值参考[附录API Frameworks]() |
-|[battr](#frc12_4)    |integer array   |否 |        限制的物料属性，枚举值参考[附录Creative Attributes](#frc12_4)|
+|api |     integer array  | 否 |        该次展示可支持的 API 框架；枚举值参考[附录API Frameworks](appendix.md#api-frameworks) |
+|battr    |integer array   |否 |        限制的物料属性，枚举值参考[附录Creative Attributes](appendix.md#creative-attributes)|
 
 ## Object: NativeRequest
 
@@ -575,7 +578,7 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
 |  ~~plcmttype~~        |integer        |否|         广告位类型；|
 |  ~~plcmtcnt~~         |integer        |否|         广告位所在页面的同类广告位数量；|
 |  ~~seq~~              |integer        |否|         广告位顺序；|
-|  [assets](#frc8_6)    |object array   |是|         通过 [Object Asset](#frc8_7)表示 native 流量对素材和其他要素的要求, 广告返回的素材和其他要素必须符合该 object 要求；|
+|  assets    |object array   |是|         通过[Object Asset](#object-asset)表示 native 流量对素材和其他要素的要求, 广告返回的素材和其他要素必须符合该 object 要求；|
 
 ## Object: Asset
 
@@ -583,10 +586,10 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
 |---|---|---|---|
 |  id                  |integer   |是|         对象唯一 id|
 |  required            |integer   |是|         表示该元素对象是否要求广告主必须返回值，0-不强制；1-必须强制返回|
-|  [title](#frc8_8)    |object Title   |否|         表示标题；见 [title object](#frc8_8)|
-|  [img](#frc8_9)      |object Img   |否|         表示图片；见 [img object](#frc8_9)|
-|  [video](#frc8_10)   |object Video   |否|         表示视频；见 [video object](#frc8_10)|
-|  [data](#frc8_11)    |object Data   |否|         表示其他信息，包括品牌名，描述，评级，价格等；见 [data object](#frc8_11)|
+|  title    |object Title   |否|         表示标题；见 [title object](#object-title)|
+|  img      |object Img   |否|         表示图片；见 [img object](#object-img)|
+|  video   |object Video   |否|         表示视频；见 [video object](#object-video)|
+|  data    |object Data   |否|         表示其他信息，包括品牌名，描述，评级，价格等；见 [data object](#object-data)|
 
 ## Object: Title
 
