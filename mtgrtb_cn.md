@@ -33,8 +33,8 @@ MTG支持以下宏替换
 
 ## 计费说明 
 
-Mintegral ADX计费以MTG ADX统计的nurl链接上报数据为准；
-Mintegral ADX 会保证一次广告最多只上报一次nurl；
+Mintegral ADX计费以MTG ADX统计的**nurl**链接上报数据为准；
+Mintegral ADX 会保证一次广告**最多只上报一次**nurl；
 同时保证上报的nurl在 DSP 要求的展示延迟有效时间范围内；
 DSP 通过 Bidresponse.Seatbid.Bid.Exp 字段限定展示延迟有效时间。
 
@@ -62,13 +62,13 @@ Rewarded video 和 Interstitial video 可支持多种视频模板，建议 DSP �
 视频模板即播放视频的UI样式。MTG ADX支持多种视频模板，以供广告主根据产品特性选择最优的模板进行投放。
 MTG ADX现阶段支持的模板如下：
 
-<img src="v1.jpg" width="500px" />
-
-![V1-视频居中播放|背景黑屏](v1.jpg)
-![V2-视频居中播放|毛玻璃背景](v2.jpg)
-![V3-上方显示视频|下方显示卡片](v3.jpg)
-![V3-上方显示视频|下方显示卡片](v4.jpg)
-![V8-中间视频|上下卡片](v5.jpg)
+|图片|描述|
+|---|----|
+|<img src="v1.jpg" width="500px" alt="视频居中播放 背景黑屏"/>|V1 视频居中播放 背景黑屏|
+|<img src="v2.jpg" width="500px" alt="视频居中播放 毛玻璃背景"/>|V2 视频居中播放 毛玻璃背景|
+|<img src="v3.jpg" width="500px" alt="上方显示视频 下方显示卡片"/>|V3 上方显示视频 下方显示卡片|
+|<img src="v4.jpg" width="500px" alt="上方显示视频 下方显示卡片"/>|V4 上方显示视频 下方显示卡片|
+|<img src="v5.jpg" width="500px" alt="中间视频 上下卡片"/>|V5 中间视频 上下卡片|
 
 
 ## 视频模板的协议和逻辑说明
