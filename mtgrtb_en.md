@@ -1,6 +1,6 @@
 - [Mintegral Adx对接文档](#mintegral-adx对接文档)
-  * [nurl和展示监测链接说明](#nurl和展示监测链接说明)
-    + [展示监测链接返回说明](#展示监测链接返回说明)
+  * [nurl和展示监测链接说明](#nURL-and-Impression-Tracking-URLs)
+    + [展示监测链接返回说明](#About-impression-tracking-URL)
   * [nurl宏替换说明](#nurl宏替换说明)
   * [计费说明](#计费说明)
   * [coppa说明](#coppa说明)
@@ -52,20 +52,19 @@
 
 # Mintegral Adx对接文档
 
-## nurl和展示监测链接说明
+## nURL and Impression Tracking URLs
 
-DSP return nURL and impression tracking URLs in bidResponse.
-MTG ADX fired all the URLs when an ad is successfully displayed in client. 
+DSPs will provide the nURLs and the impression tracking URLs in the bidResponse, whereas impression tracking URLs are optional.
+MTG ADX will call back both the nURL and the impression tracking URL when an Ad is displayed on the client device. 
 
-### 展示监测链接返回说明
+### About impression tracking URL
 
-为了缩小展示数据差异，建议对于所有广告形式，DSP都返回独立的展示监测链接回收展示数据。
+To reduce variance in the impression statistic, it is suggested to provide an individual tracking URL for each Ad type and each DSP.
 
-Native image和Native video，DSP通过Native Ads协议的imptrackers字段返回展示监测链接；
-
-Rewarded video 和 Interstitial video，DSP通过VAST的\<impression>标签返回展示监测链接；
-
-Interative ads和Banner，DSP通过 Bidresponse.Seatbid.Bid.Ext.Imptrakers 返回展示监测链接。
+For different ad types, DSP should follow the rules below to submit impression tracking URLs.
+1) Interactive ads and Banner: The impression tracking URL is provided in the filed **Bidresponse.Seatbid.Bid.Ext.Imptrakers**
+2) Native image and Native video: The impression tracking URL is provided in the field **imptrakers** of the Native Ads protocol. 
+3) Rewarded video and Interstitial video ad formats: The impression tracking URL is provided in the \<impression>tag of VAST.
 
 ## nurl宏替换说明
 
@@ -876,7 +875,7 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
 
 ### Object: Asset.Link
 
-| 参数名称      | 类型             | 是否必传 | 描述                   |
+| 参数名称      | 类型             | 是否必��� | 描述                   |
 |---------------|------------------|----------|------------------------|
 | url           | string           | 是       | 点击跳转 url 地址      |
 | clicktrackers | array of strings | 否       | 第三方点击监测链接数组 |
