@@ -2,7 +2,7 @@
   * [nurl和展示监测链接说明](#nURL-and-Impression-Tracking-URLs)
     + [展示监测链接返回说明](#About-impression-tracking-URL)
   * [nURL Macro Substitution](#nURL-Macro-Substitution)
-  * [计费说明](#计费说明)
+  * [About Billing](#About-Billing)
   * [coppa说明](#coppa说明)
   * [广告形式说明](#广告形式说明)
   * [视频模板说明(可选)](#视频模板说明可选)
@@ -80,12 +80,12 @@ MTG ADX support the following macro substitution.
 |${AUCTION_PRICE}	 | Settlement Price |	Encrypted settlement price, for more details please refer to the settlement price decryption section|
 
 
-## 计费说明 
+## About Billing 
 
-Mintegral ADX计费以MTG ADX统计的**nurl**链接上报数据为准；
-Mintegral ADX 会保证一次广告**最多只上报一次**nurl；
-同时保证上报的nurl在 DSP 要求的展示延迟有效时间范围内；
-DSP 通过 Bidresponse.Seatbid.Bid.Exp 字段限定展示延迟有效时间。
+MTG ADX bills DSPs based on the callback times of the nURLs.
+MTG ADX will guarantee **at most once** callback on the nURL each time an Ad is displayed；
+Meanwhile, MTG ADX will also ensure the callback of the nURL will happen within a valid period after the demonstration of the Ad.
+DSP can set the timeout of this period in the field Bidresponse.Seatbid.Bid.Exp.
 
 ## coppa说明
 如果Bidrequest.Regs.Coppa的值为1，表示该次流量对应的用户是13岁以下的儿童，或者该次流量对应的APP是儿童导向的APP；
