@@ -4,7 +4,7 @@
   * [nURL Macro Substitution](#nURL-Macro-Substitution)
   * [About Billing](#About-Billing)
   * [About COPPA](#About-COPPA)
-  * [广告形式说明](#广告形式说明)
+  * [Supported Advertisement Types](#Supported-Advertisement-Types)
   * [视频模板说明(可选)](#视频模板说明可选)
     + [视频模板介绍](#视频模板介绍)
   * [视频模板的协议和逻辑说明](#视频模板的协议和逻辑说明)
@@ -83,14 +83,20 @@ MTG ADX support the following macro substitution.
 ## About Billing 
 
 MTG ADX bills DSPs based on the callback times of the nURLs.
+
 MTG ADX will guarantee **at most once** callback on the nURL each time an Ad is displayed；
+
 Meanwhile, MTG ADX will also ensure the callback of the nURL will happen within a valid period after the demonstration of the Ad.
+
 DSP can set the timeout of this period in the field Bidresponse.Seatbid.Bid.Exp.
 
 ## About COPPA
 
 If the value of bidrequest.regs.coppa is 1, it means that this Ad flow is targeted at children under the age of 13, or a child-oriented App.
-In this case, the DSP must guarantee the provided Ads are appropriate for children under the age of 13. Meanwhile, the DSP must ensure data collection, data usage and data tracking comply with the COPPA regulations.
+
+In this case, the DSP must guarantee the provided Ads are appropriate for children under the age of 13. 
+
+Meanwhile, the DSP must ensure data collection, data usage and data tracking comply with the COPPA regulations.
 
 ## Supported Advertisement Types
 
