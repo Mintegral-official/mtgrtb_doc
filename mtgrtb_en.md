@@ -3,7 +3,7 @@
     + [展示监测链接返回说明](#About-impression-tracking-URL)
   * [nURL Macro Substitution](#nURL-Macro-Substitution)
   * [About Billing](#About-Billing)
-  * [coppa说明](#coppa说明)
+  * [About COPPA](#About-COPPA)
   * [广告形式说明](#广告形式说明)
   * [视频模板说明(可选)](#视频模板说明可选)
     + [视频模板介绍](#视频模板介绍)
@@ -87,10 +87,10 @@ MTG ADX will guarantee **at most once** callback on the nURL each time an Ad is 
 Meanwhile, MTG ADX will also ensure the callback of the nURL will happen within a valid period after the demonstration of the Ad.
 DSP can set the timeout of this period in the field Bidresponse.Seatbid.Bid.Exp.
 
-## coppa说明
-如果Bidrequest.Regs.Coppa的值为1，表示该次流量对应的用户是13岁以下的儿童，或者该次流量对应的APP是儿童导向的APP；
-在此种情况下，DSP需要保证返回的广告内容级别符合13岁以下儿童，同时保证数据收集使用和追踪行为符合Coppa的相关规定。
-DSP可查阅MTG ADX合同对此的更详细规定。
+## About COPPA
+
+If the value of bidrequest.regs.coppa is 1, it means that this Ad flow is targeted at children under the age of 13, or a child-oriented App.
+In this case, the DSP must guarantee the provided Ads are appropriate for children under the age of 13. Meanwhile, the DSP must ensure data collection, data usage and data tracking comply with the COPPA regulations.
 
 ## 广告形式说明
 
