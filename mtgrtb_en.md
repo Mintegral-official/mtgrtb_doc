@@ -92,14 +92,14 @@ DSP can set the timeout of this period in the field Bidresponse.Seatbid.Bid.Exp.
 If the value of bidrequest.regs.coppa is 1, it means that this Ad flow is targeted at children under the age of 13, or a child-oriented App.
 In this case, the DSP must guarantee the provided Ads are appropriate for children under the age of 13. Meanwhile, the DSP must ensure data collection, data usage and data tracking comply with the COPPA regulations.
 
-## 广告形式说明
+## Supported Advertisement Types
 
-Mintegral ADX目前的广告形式包括：
+MTG ADX supports the following types of advertisement：
 
-* 激励视频 Rewarded Video
-* 插屏视频 Interstitial Video
-* 原生视频 Native Video
-* 原生图片 Native Image
+* Rewarded Video
+* Interstitial Video
+* Native Video
+* Native Image
 
 ## 视频模板说明(可选)
 
