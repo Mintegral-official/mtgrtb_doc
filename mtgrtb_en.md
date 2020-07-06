@@ -5,7 +5,7 @@
   * [About Billing](#About-Billing)
   * [About COPPA](#About-COPPA)
   * [Supported Advertisement Types](#Supported-Advertisement-Types)
-  * [视频模板说明(可选)](#视频模板说明可选)
+  * [About Video Template (optional)](#About-Video-Template-optional)
     + [视频模板介绍](#视频模板介绍)
   * [视频模板的协议和逻辑说明](#视频模板的协议和逻辑说明)
     + [视频模板的素材映射表](#视频模板的素材映射表)
@@ -107,10 +107,9 @@ MTG ADX supports the following types of advertisement：
 * Native Video
 * Native Image
 
-## 视频模板说明(可选)
+## About Video Template (optional)
 
-Rewarded video 和 Interstitial video 可支持多种视频模板，建议 DSP 可从中选择效果最优的模板进行投放；
-此逻辑为优化可选逻辑，DSP可以选择不支持；
+Rewarded video and Interstitial video support multiple video templates，DSP can compare and choose one or more of them to use. However, this is fully optional. 
 
 ### 视频模板介绍
 
