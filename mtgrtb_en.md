@@ -77,7 +77,7 @@ MTG ADX support the following macro substitution.
 |${AUCTION_IMP_ID} | Impression ID    |	The response Bid.ImpId from DSP|
 |${AUCTION_SEAT_ID}| Seat ID          |	The response BidResponse.SeatBid.Seat from DSP|
 |${AUCTION_AD_ID}	 | Advertisement ID | The Ad ID Bid.Adid|
-|${AUCTION_PRICE}	 | Settlement Price |	Encrypted settlement price, for more detail please refer to the settlement price decryption section|
+|${AUCTION_PRICE}	 | Settlement Price |	Encrypted settlement price, for more details please refer to the settlement price decryption section|
 
 
 ## 计费说明 
