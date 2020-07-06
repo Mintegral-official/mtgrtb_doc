@@ -1,7 +1,7 @@
 - [Mintegral Adx对接文档](#mintegral-adx对接文档)
   * [nurl和展示监测链接说明](#nURL-and-Impression-Tracking-URLs)
     + [展示监测链接返回说明](#About-impression-tracking-URL)
-  * [nurl宏替换说明](#nurl宏替换说明)
+  * [nURL Macro Substitution](#nURL-Macro-Substitution)
   * [计费说明](#计费说明)
   * [coppa说明](#coppa说明)
   * [广告形式说明](#广告形式说明)
@@ -66,18 +66,18 @@ For different ad types, DSP should follow the rules below to submit impression t
 2) Native image and Native video: The impression tracking URL is provided in the field **imptrakers** of the Native Ads protocol. 
 3) Rewarded video and Interstitial video ad formats: The impression tracking URL is provided in the \<impression>tag of VAST.
 
-## nurl宏替换说明
+## nURL Macro Substitution
 
-MTG支持以下宏替换
+MTG ADX support the following macro substitution.
 
-| 宏名 | 含义 | 备注 |
+| Name | Description | Note |
 |---|---|---|
-| ${AUCTION_ID} |	竞价请求 ID |	mtg-adx 请求dsp 的request.id |
-| ${AUCTION_BID_ID}	| DSP 竞价响应的 ID	| DSP返回的mtg-adx的BidResponse.BidID |
-|${AUCTION_IMP_ID} |展示 ID |	DSP 返回的 Bid.ImpId|
-|${AUCTION_SEAT_ID} |席位 ID |	DSP返回的BidResponse.SeatBid.Seat|
-|${AUCTION_AD_ID}	 |广告 ID |	广告 ID，Bid.Adid|
-|${AUCTION_PRICE}	 |结算价格 |	加密后的结算价格，具体请参考结算价格解密|
+|${AUCTION_ID}     |	Bid Request ID  |	The request.id from MTG ADX to DSP |
+|${AUCTION_BID_ID} | Bid Response ID	| The response BidResponse.BidID from DSP to MTG ADX |
+|${AUCTION_IMP_ID} | Impression ID    |	The response Bid.ImpId from DSP|
+|${AUCTION_SEAT_ID}| Seat ID          |	The response BidResponse.SeatBid.Seat from DSP|
+|${AUCTION_AD_ID}	 | Advertisement ID | The Ad ID Bid.Adid|
+|${AUCTION_PRICE}	 | Settlement Price |	Encrypted settlement price, for more detail please refer to the settlement price decryption section|
 
 
 ## 计费说明 
