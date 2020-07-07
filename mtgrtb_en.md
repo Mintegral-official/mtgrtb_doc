@@ -138,9 +138,7 @@ The structure of a Video Template object:
 |name	 |String|	Yes| 	Template name|
 |videow	 |integer| The videow/ videoh pair or the videoorientaion will be presented |	Width of the video player in device independent pixels (DIPS).|
 |videoh	 |integer|	The videow/ videoh pair or the videoorientaion will be presented| Height of the video player in device independent pixels (DIPS).|
-|videoorientation	 |integer|```The videow/ videoh pair or the videoorientaion will be presented	|Orientation of video. Enumeration value is as below: 1="portrait",2="horizontal". 
-1 represents DSP can return video with a ratio of 16:9,
-2 represents DSP can return video with a ratio of 16:9 or 9:16.```|
+|videoorientation	 |integer|The videow/ videoh pair or the videoorientaion will be presented	|Orientation of video. Enumeration value is as below: 1="portrait",2="horizontal". 1 represents DSP can return video with a ratio of 16:9, 2 represents DSP can return video with a ratio of 16:9 or 9:16.|
 
 2. Response: DSP returns the ID of the chosen video template, as well as the creative elements required for the video template.
 
