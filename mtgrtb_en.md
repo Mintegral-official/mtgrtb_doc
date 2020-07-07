@@ -6,8 +6,8 @@
   * [About COPPA](#About-COPPA)
   * [Supported Advertisement Types](#Supported-Advertisement-Types)
   * [About Video Template (optional)](#About-Video-Template-optional)
-    + [视频模板介绍](#视频模板介绍)
-  * [视频模板的协议和逻辑说明](#视频模板的协议和逻辑说明)
+    + [What is Video Template](#What-is-Video-Template)
+  * [How to Use Video Template](#How-to-Use-Video-Template)
     + [视频模板的素材映射表](#视频模板的素材映射表)
   * [VAST说明](#vast说明)
   * [请求示例](#请求示例)
@@ -111,44 +111,48 @@ MTG ADX supports the following types of advertisement：
 
 Rewarded video and Interstitial video support multiple video templates，DSP can compare and choose one or more of them to use. However, this is fully optional. 
 
-### 视频模板介绍
+### What is Video Template
 
-视频模板即播放视频的UI样式。MTG ADX支持多种视频模板，以供广告主根据产品特性选择最优的模板进行投放。
-MTG ADX现阶段支持的模板如下：
+Video templates are multiple predefined video playing modes, DSPs can choose the optimal template to serve ads.
 
-|图片|描述|
+MTG ADX supports the following video templates：
+
+|Image|Description|
 |---|----|
-|<img src="v1.jpg" width="500px" alt="视频居中播放 背景黑屏"/>|V1 视频居中播放 背景黑屏|
-|<img src="v2.jpg" width="500px" alt="视频居中播放 毛玻璃背景"/>|V2 视频居中播放 毛玻璃背景|
-|<img src="v3.jpg" width="500px" alt="上方显示视频 下方显示卡片"/>|V3 上方显示视频 下方显示卡片|
-|<img src="v4.jpg" width="500px" alt="上方显示视频 下方显示卡片"/>|V4 上方显示视频 下方显示卡片|
-|<img src="v5.jpg" width="500px" alt="中间视频 上下卡片"/>|V5 中间视频 上下卡片|
+|<img src="v1.jpg" width="500px" alt="视频居中播放 背景黑屏"/>|V1 Video centered with black background|
+|<img src="v2.jpg" width="500px" alt="视频居中播放 毛玻璃背景"/>|V2 Video centered with Gaussian Blur|
+|<img src="v3.jpg" width="500px" alt="上方显示视频 下方显示卡片"/>|V3 Video on top with info-card at bottom|
+|<img src="v4.jpg" width="500px" alt="上方显示视频 下方显示卡片"/>|V4 Video on top with storekit at bottom|
+|<img src="v5.jpg" width="500px" alt="中间视频 上下卡片"/>|V5 Video in the middle of two info-cards|
 
 
-## 视频模板的协议和逻辑说明
+## How to Use Video Template
 
-视频模板是可选逻辑，可不实现
+1. Request: If a DSP wants to use video template, MTG ADX will send in the bidrequest with the field bidrequest.imp.video.ext.videotemplate set, which is an array of objects and each object represents a type of video template.
+The structure of a Video Template object:
+**When video templates are in use, the width and height requirement of the video template object are applied, instead of the width and height requirement of the video object**
 
-1. 请求逻辑：若DSP支持视频模板优选逻辑，MTG ADX在发起广告请求时，将带上bidrequest.imp.video.ext.videotemplate这个字段，
-字段类型为object array，每个 object 代表可支持的一个模板。videotemplate object的结构和说明如下： 重点说明：若DSP使用视频模板功能，
-则直接根据videotemplate object的视频宽高或横竖屏要求筛选视频（不再根据video object的宽高筛选视频）。
-
-
-| 参数名称	|类型	|是否必传|	描述|
+| Attribute	| Type	| Required | Description |
 |---|---|---|---|
-|id |	integer	|是	| 模板 id
-|name	 |String|	是| 	模板名称
-|videow	 |integer|	宽高和横竖屏两组字段，或者传宽高，或者传横竖屏|	视频宽度要求，单位为像素
-|videoh	 |integer|	宽高和横竖屏两组字段，或者传宽高，或者传横竖屏| 视频高度要求，单位为像素；
-|videoorientation	 |integer|宽高和横竖屏两组字段，或者传宽高，或者传横竖屏	|视频横竖屏要求，枚举值1="portrait"，2="horizontal" 如果值为 2，可返回宽高比例为 16:9 的视频， 如果值为 1，可返回宽高比例为 9:16 或 16:9 的视频 |
+|id |	integer	|Yes	| Template id
+|name	 |String|	Yes| 	Template name
+|videow	 |integer|	The videow/ videoh pair
+or the videoorientaion will be presented|	Width of the video player in device independent pixels (DIPS).
+|videoh	 |integer|	The videow/ videoh pair
+or the videoorientaion will be presented| Height of the video player in device independent pixels (DIPS).
+|videoorientation	 |integer|The videow/ videoh pair
+or the videoorientaion will be presented	|Orientation of video. Enumeration value is as below:
+1="portrait",2="horizontal". 
+1 represents DSP can return video with a ratio of 16:9,
+2 represents DSP can return video with a ratio of 16:9 or 9:16. |
 
-2. 返回逻辑：DSP在response中返回选中的模板id，并同时返回该模板所需的素材元素（根据本文档的模板和素材映射表返回）。具体返回做法说明如下：
-   
-  在VAST的\<Extensions>tag下增加\<Template type="video">,在此tag中返回模板id；
+2. Response: DSP returns the ID of the chosen video template, as well as the creative elements required for the video template.
+
+  DSP should add a \<Template type="video"> tag under the \<Extension> tag in VAST, and provide the ID of the chosen vide template. 
   
-  增加\<Asset> tag，在此tag中返回除视频、title和desc之外的其他素材
-  
-  视频素材在VAST中作为linear creative返回，title通过VAST\<AdTitle>tag返回，description通过\<Description>tag返回
+  Assets except video, title and desc should be provided under \<Asset> tags.
+
+  Please note that videos should always be provided as linear creative, and title should be provided in a \<Title> tag, and description in a \<description>tag.
   ```xml
 <Extensions>
   <Extension>
