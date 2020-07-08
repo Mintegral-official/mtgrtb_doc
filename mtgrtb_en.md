@@ -8,7 +8,7 @@
   * [About Video Template (optional)](#About-Video-Template-optional)
     + [What is Video Template](#What-is-Video-Template)
   * [How to Use Video Template](#How-to-Use-Video-Template)
-    + [视频模板的素材映射表](#视频模板的素材映射表)
+    + [Video Template and Required Creatives](#Video-Template-and-Required-Creatives)
   * [VAST说明](#vast说明)
   * [请求示例](#请求示例)
     + [Rewarded Video & Interstitial Video Request](#rewarded-video--interstitial-video-request)
@@ -160,17 +160,17 @@ The structure of a Video Template object:
 </Extensions>
   ```
 
-### 视频模板的素材映射表
+### Video Template and Required Creatives
 
-“/”表示不要求
+“/” Not Required
 
-|id|	Name|	title(广告标题）|	Description(广告描述)|	 icon(广告icon)	|CTA(按钮文字)|	star rating(星星评级)|	bundle id(广告包名)|
+|id|	Name|	title |	Description | icon |CTA |	star rating |	bundle id |
 |---|---|---|---|---|---|---|---|
 |1|	v1-视频居中播放 背景黑屏	|/|	/|	/|	/|	/|	/|
 |2|	v2-视频居中播放 毛玻璃背景	|/|	/|	/|	/|	/|	/|
-|3|	v3-上方显示视频 方显示卡片	|字数 15 字符以内	| /	|宽高比1:1	|字数5字符以内(非强制)|	非强制	| / |
-|4|	v4-上方显示视频 下方显示storekit |/|/| 	/|	/|	/|	ios示例:907394059 |
-|8|	v8-中间视频 上下卡片|	字数15字符以内|	字数30字符以内|	宽高比1:1|	字数5字符以内	|(非强制)	|/ |
+|3|	v3-上方显示视频 方显示卡片	|15 characters max | /	|w/h ratio of 1:1| 5 characters max (optional)|	optional | / |
+|4|	v4-上方显示视频 下方显示storekit |/|/| 	/|	/|	/|	ios example: 907394059 |
+|8|	v8-中间视频 上下卡片|	15 characters max|	30 characters max|	w/h ratio of 1:1|	5 characters max	| optional |/ |
 
 
 ## VAST说明
