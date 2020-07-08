@@ -123,7 +123,7 @@ MTG ADX supports the following video templates：
 |<img src="v2.jpg" width="500px" alt="视频居中播放 毛玻璃背景"/>|V2 Video centered with Gaussian Blur|
 |<img src="v3.jpg" width="500px" alt="上方显示视频 下方显示卡片"/>|V3 Video on top with info-card at bottom|
 |<img src="v4.jpg" width="500px" alt="上方显示视频 下方显示卡片"/>|V4 Video on top with storekit at bottom|
-|<img src="v5.jpg" width="500px" alt="中间视频 上下卡片"/>|V5 Video in the middle of two info-cards|
+|<img src="v5.jpg" width="500px" alt="中间视频 上下卡片"/>|V8 Video in the middle of two info-cards|
 
 
 ## How to Use Video Template
@@ -166,11 +166,11 @@ The structure of a Video Template object:
 
 |id|	Name|	title |	Description | icon |CTA |	star rating |	bundle id |
 |---|---|---|---|---|---|---|---|
-|1|	v1-视频居中播放 背景黑屏	|/|	/|	/|	/|	/|	/|
-|2|	v2-视频居中播放 毛玻璃背景	|/|	/|	/|	/|	/|	/|
-|3|	v3-上方显示视频 方显示卡片	|15 characters max | /	|w/h ratio of 1:1| 5 characters max (optional)|	optional | / |
-|4|	v4-上方显示视频 下方显示storekit |/|/| 	/|	/|	/|	ios example: 907394059 |
-|8|	v8-中间视频 上下卡片|	15 characters max|	30 characters max|	w/h ratio of 1:1|	5 characters max	| optional |/ |
+|1|	V1 Video centered with black background	|/|	/|	/|	/|	/|	/|
+|2|	V2 Video centered with Gaussian Blur	|/|	/|	/|	/|	/|	/|
+|3|	V3 Video on top with info-card at bottom	|15 characters max | /	|w/h ratio of 1:1| 5 characters max (optional)|	optional | / |
+|4|	V4 Video on top with storekit at bottom |/|/| 	/|	/|	/|	ios example: 907394059 |
+|8|	V8 Video in the middle of two info-cards|	15 characters max|	30 characters max|	w/h ratio of 1:1|	5 characters max	| optional |/ |
 
 
 ## VAST说明
