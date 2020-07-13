@@ -537,12 +537,12 @@ Standard attributes from IAB open RTB that are not supported by Mintegral ADX ar
  | ~~wlang~~  |   string array|   No|   White list of languages for creatives using ISO-639-1-alpha-2. Omission implies no specific restrictions, but buyers would be advised to consider language attribute in the Device and/or Content objects if available.|
  | bcat    | string array  | No    | Blocked advertiser categories using the IAB content categories. Refer to Appendix-Content Categories.|
  | badv    |  string array|  No|   Block list of advertisers by their domains (e.g., “ford.com”).|
- | bapp    |  string array|  No|   Block list of applications by their platform-specific exchange-independent
- application identifiers. For example, on Android com.amazon.mShop; on IOS：*907394059* |
+ | bapp    |  string array|  No|   
+ Block list of applications by their platform-specific exchange-independent application identifiers. For example, on Android com.amazon.mShop; on IOS：*907394059* |
  | ~~source~~|  object|   No|
- A Sorce object (Section 3.2.2) that provides data about the inventory source and
- which entity makes the final decision.|
- | regs    | object  |  No|A Regs object that specifies any industry, legal, or governmental regulations in force for this request. Refer to [Object Regs](#object-regs) |
+ A Sorce object (Section 3.2.2) that provides data about the inventory source and which entity makes the final decision.|
+ | regs    | object  |  No|
+ A Regs object that specifies any industry, legal, or governmental regulations in force for this request. Refer to [Object Regs](#object-regs) |
 
 ### Object: Imp
 
