@@ -583,32 +583,32 @@ Standard attributes from IAB open RTB that are not supported by Mintegral ADX ar
 
 | Attribute	| Type |	Required	| Description |
 |---|---|---|---|
-|mimes|	string array|	Yes|支持的内容 mime-type；包括但不仅限于“video/mp4”；|
-|minduration	|integer	|No|	最小的视频长度， 以秒为单位；|
-|maxduration	|integer	|No|	最大的视频长度， 以秒为单位；|
-|protocols	|integer array	|No|	支持的视频竞价响应协议；枚举值参考附录Protocols|
-|w|	integer	|Yes|视频播放器的宽度，单位为像素|
-|h|	integer	|Yes|视频播放器的高度，单位为像素|
-|~~startdelay~~	|integer	|Yes|视频前，中及之后的广告位中视频广告的启动延时，以秒为单位,枚举值参考附录Start Delay|
-|~~placement~~	|integer	|Yes|广告位Type；枚举值参考Video Placement Types；|
-|linearity	|integer	|Yes|展示是否是线性的，1-线性；2-非线性；|
-|skip	|integer	|Yes|传 0 表示不支持用户 skip，传 1 表示支持用户 skip；|
-|~~skipmin~~|	integer	|Yes|最小可跳过的广告总时长；超过该时长的广告才支持跳过；|
-|~~skipafter~~	|integer	|Yes|广告播放多少秒后可跳过；|
-|sequence	|integer	|Yes|如果在同一个竞价请求中提供了多个展示， 则需要考虑多个物料传输的顺序|
-|battr	|integer array	|Yes|限制不可投放的物料属性，枚举值参考附录Creative Attributes|
-|~~maxextended~~	|integer|	No|	最大的视频广告延长时间长度（如果支持延长）-1：表示允许延时，且没有时间限制空或者0：表示不允许延长大于0：表示可以延长的时间长度比maxduration大的值|
-|minbitrate	|integer	|Yes|最小的比特率，以 Kbps 为单位；缺省表示不限制|
-|maxbitrate	|integer	|Yes|最大的比特率，以 Kbps 为单位；缺省表示不限制|
-|~~boxingallowed~~	|integer|	Yes|是否允许将4：3的内容展示在16：9的窗口， 0表示不允许，1表示允许|
-|playbackmethod	|integer array	|No|	允许的播放方式，播放方式和对应的枚举值如下：1: 自动播放（有声）2: 自动播放（静音）3: 点击播放 如果该字段缺省，表示支持全部|
-|~~playbackend~~	|integer	|No|	导致视频播放中断的原因；|
-|delivery	|integer array	|No|	支持的传输方式，传输方式和对应的枚举值如下：1-Streaming；2-Progressive如果没有指定，表示全部支持|
-|~~pos~~	|integer|	No|	广告位置，枚举值参考附录Ad Position|
-|companionad	|object array	|No|	如果视频支持伴随广告，该字段表示一组 Banner 对象；|
-|api	|integer array|	No|	该次展示可支持的 API 框架；枚举值参考附录API Frameworks该字段缺省表示所有枚举值均不支持；|
-|companiontype	|integer array	|No|	支持的 VAST companion广告Type；如果在companionad 中填充了 Banner 对象则推荐使用；枚举值参考附录Companion Types|
-|ext	|object|	No|	见Object：ext|
+|mimes|	string array|	Yes| Supported mine-type, including but not limited to "video/mp4".|
+|minduration	|integer	|No|	Minimum video ad duration in seconds.|
+|maxduration	|integer	|No|	Maximum video ad duration in seconds.|
+|protocols	|integer array	|No|	Array of supported video protocols. Refer to List Protocols. |
+|w|	integer	|Yes|Width of the video player in device independent pixels (DIPS).|
+|h|	integer	|Yes|Height of the video player in device independent pixels (DIPS).|
+|~~startdelay~~	|integer	|Yes|Indicates the start delay in seconds for pre-roll, mid-roll, or post-roll ad placements. Refer to List Start Delay for additional generic values.|
+|~~placement~~	|integer	|Yes| Placement type for the impression. Refer to List Placement Types|
+|linearity	|integer	|Yes|Indicates if the impression must be linear or not. 1 = linear, 2 = nonlinear.|
+|skip	|integer	|Yes|Indicates if the player will allow the video to be skipped, where 0 = no, 1 = yes.|
+|~~skipmin~~|	integer	|Yes|Videos of total duration greater than this number of seconds can be skippable; only applicable if the ad is skippable.|
+|~~skipafter~~	|integer	|Yes|Number of seconds a video must play before skipping is enabled; Only applicable if the ad is skippable.|
+|sequence	|integer	|Yes|If multiple ad impressions are offered in the same bid request, the sequence number will allow for the coordinated delivery of multiple creatives.|
+|battr	|integer array	|Yes|Blocked creative attributes. Refer to List Creative Attributes|
+|~~maxextended~~	|integer|	No|	Maximum extended ad duration if extension is allowed. If blank or 0, extension is not allowed. If -1, extension is allowed, and there is no time limit imposed. If greater than 0, then the value represents the number of seconds of extended play supported beyond the maxduration value.|
+|minbitrate	|integer	|Yes|Minimum bit rate in Kbps. No limit if not provided.|
+|maxbitrate	|integer	|Yes|Maximum bit rate in Kbps. No limit if not provided.|
+|~~boxingallowed~~	|integer|	Yes|Indicates if letter-boxing of 4:3 content into a 16:9 window is allowed, where 0 = no, 1 = yes.|
+|playbackmethod	|integer array	|No| Playback methods that may be in use. If none are specified, any method may be used. 1 = auto play with sound, 2 = auto play silently, 3 = click to play.|
+|~~playbackend~~	|integer	|No|The event that causes playback to end.|
+|delivery	|integer array	|No|	Supported delivery methods, 1 = streaming, 2 = progressive. If none specified, assume all are supported.|
+|~~pos~~	|integer|	No|	Ad position on screen. Refer to List Ad Position|
+|companionad	|object array	|No|	Array of Banner objects if companion ads are available.|
+|api	|integer array|	No|	List of supported API frameworks for this impression. Refer to List API Frameworks. If an API is not explicitly listed, it is assumed not to be supported.|
+|companiontype	|integer array	|No|	Supported VAST companion ad types. Recommended if companion Banner objects are included via the companionad array. If one of these banners will be rendered as an end-card, this can be specified using the vcm attribute with the particular banner. Refer to List Companion Types|
+|ext	|object|	No|	Refer to [Object：ext](#object-ext)|
 
 
 ## Object: Native
