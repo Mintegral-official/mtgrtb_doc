@@ -557,10 +557,9 @@ Standard attributes from IAB open RTB that are not supported by Mintegral ADX ar
 |instl	|integer	|No|	1 = the ad is interstitial or full screen, 0 = not interstitial. default 0.|
 |tagid	|string	|Yes|Identifier for specific ad placement or ad tag that was used to initiate the auction. This can be useful for debugging of any issues, or for optimization by the buyer.|
 |bidfloor|	float	|Yes|Minimum bid for this impression expressed in CPM. default 0.|
-|bidfloorcur|	string	|Yes|Currency specified using ISO-4217 alpha codes. This may be different from bid
-currency returned by bidder if this is allowed by the exchange. default USD|
+|bidfloorcur|	string	|Yes|Currency specified using ISO-4217 alpha codes. This may be different from bid currency returned by bidder if this is allowed by the exchange. default USD|
 |secure|	integer	|Yes|	Flag to indicate if the impression requires secure HTTPS URL creative assets and markup, where 0 = non-secure, 1 = secure.|
-|~~iframebuster~~|	Array of exchange\-specific names of supported iframe busters.|
+|~~iframebuster~~| string array | No|	Array of exchange\-specific names of supported iframe busters.|
 |~~exp~~|	integer	|No|	Advisory as to the number of seconds that may elapse between the auction and the actual impression.|
 
 ### Object: Banner
