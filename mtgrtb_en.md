@@ -538,7 +538,7 @@ Standard attributes from IAB open RTB that are not supported by Mintegral ADX ar
  | bcat    | string array  | No    | Blocked advertiser categories using the IAB content categories. Refer to Appendix-Content Categories.|
  | badv    |  string array|  No|   Block list of advertisers by their domains (e.g., “ford.com”).|
  | bapp    |  string array|  No|   Block list of applications by their platform-specific exchange-independent
-application identifiers. For example, on Android com.amazon.mShop; on IOS：*907394059* |
+ application identifiers. For example, on Android com.amazon.mShop; on IOS：*907394059* |
  | ~~source~~|  object|   No|   A Sorce object (Section 3.2.2) that provides data about the inventory source and
 which entity makes the final decision.|
  | regs    | object  |  No|     A Regs object that specifies any industry, legal, or governmental regulations
