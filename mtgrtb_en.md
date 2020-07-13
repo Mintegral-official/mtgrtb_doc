@@ -548,22 +548,25 @@ in force for this request. Refer to [Object Regs](#object-regs) |
 
 | Attribute	| Type |	Required	| Description |
 | ---|---|---|---|
-|id	|string|	Yes|请求中唯一标识本次出售展示的标识；Mintegral ADX 一次请求只出售一个展示|
-|~~metric~~	|object array |	No|	返回允许的货币Type|
-|banner	|object Banner	 |Banner流量必传|	见 Object Banner|
-|video	|object	Video |Video 流量必传|	见 Object Video|
-|audio	|object	|Audio流量必传|	见 Object Audio|
-|native	|object Native	|Native流量必传|	见 Object Native|
-|~~pmp~~	|object	|No|	私有市场交易|
-|~~displaymanager~~	|string|	No|	媒体合作伙伴的名字，|
-|~~displaymanagerver~~	|string	|No|	媒体合作伙伴的版本|
-|instl	|integer	|No|	0-非插屏；1-广告为全屏或者插屏|
-|tagid	|string	|Yes|广告位的唯一标识|
-|bidfloor|	float	|Yes|本次展示的cpm底价|
-|bidfloorcur|	string	|Yes|DSP 竞价货币单位；默认为美元 USD|
-|secure|	integer	|Yes|	标识展示请求是否需要使用HTTPS，默认0, 0-标识不需要使用安全链路； 1-标识需要使用安全链路|
-|~~iframebuster~~|	string array	|Yes|特定交易支持的iframe buster的名字数组|
-|~~exp~~|	integer	|No|	建议广告展示有效时间窗口|
+|id	|string|	Yes| A unique identifier for this impression within the context of the bid request; On Mintegral ADX, one request only sells one impression.|
+|~~metric~~	|object array |	No|	An array of Metric object|
+|banner	|object Banner	 |Banner流量必传|	Refer to [Object Banner](#object-banner)|
+|video	|object	Video |Video 流量必传|	Refer to [Object Video](#object-video)|
+|audio	|object	|Audio流量必传|	Object Audio|
+|native	|object Native	|Native流量必传|	Refer to [Object Native](#object-native)|
+|~~pmp~~	|object	|No|	A Pmp object containing any private marketplace deals in effect for this impression.|
+|~~displaymanager~~	|string|	No|	Name of ad mediation partner, SDK technology, or player responsible for rendering ad (typically video or mobile). Used by some ad servers to customize ad code by partner. Recommended for video and/or apps.|
+|~~displaymanagerver~~	|string	|No|	Version of ad mediation partner, SDK technology, or player responsible for rendering ad (typically video or mobile). Used by some ad servers to customize ad code by partner. Recommended for video and/or apps.|
+|instl	|integer	|No|	1 = the ad is interstitial or full screen, 0 = not interstitial. default 0.|
+|tagid	|string	|Yes|Identifier for specific ad placement or ad tag that was used to initiate the auction.
+This can be useful for debugging of any issues, or for optimization by the buyer.|
+|bidfloor|	float	|Yes|Minimum bid for this impression expressed in CPM. default 0.|
+|bidfloorcur|	string	|Yes|Currency specified using ISO-4217 alpha codes. This may be different from bid
+currency returned by bidder if this is allowed by the exchange. default USD|
+|secure|	integer	|Yes|	Flag to indicate if the impression requires secure HTTPS URL creative assets
+and markup, where 0 = non-secure, 1 = secure.|
+|~~iframebuster~~|	Array of exchange-specific names of supported iframe busters.|
+|~~exp~~|	integer	|No|	Advisory as to the number of seconds that may elapse between the auction and the actual impression.|
 
 ### Object: Banner
 
