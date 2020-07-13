@@ -566,18 +566,18 @@ Standard attributes from IAB open RTB that are not supported by Mintegral ADX ar
 
 | Attribute	| Type |	Required	| Description |
 | ---|---|---|---|
-|format	|object array|	No|	若广告位可兼容多组宽高，则通过该字段列举可兼容的多组宽高|
-|w	|integer|	No|	广告位宽度，单位为设备独立像素|
-|h	|integer|	No|	广告位高度，单位为设备独立像素|
-|id	|string	|Yes|banner 对象的唯一标识；在一个 Ad 中包含 Banner 与 Video 的时候使用|
-|btype|	integer array	|No|	限制不可投放的bannerType，枚举值参考附录Banner Ad Types|
-|battr|	integer array	|No|	限制不可投放的物料属性，枚举值参考附录Creative Attributes|
-|pos|	integer|	No|	广告位置，枚举值参考附录Ad Position|
-|mimes|	string array|	Yes|	支持的内容 mime-type；包括但不仅限于“application/javascript”, “image/jpg”, and “image/gif”|
-|~~topfram~~|	integer	|No|	banner是在顶层frame中而不是iframe中，0-不是; 1-Yes|
-|~~expdir~~|	integer array	|No|	banner可以扩展的方向，参考表附录Expandable Direction|
-|api|	integer array	|No|	该次展示可支持的 API 框架；枚举值释义参考附录API Frameworks；该字段缺省表示所有枚举值均不支持|
-|~~vcm~~|	integer	|No|	当banner object作为video object的伴随广告时，标识伴随广告的渲染模式；0-concurrent, 1-endcard|
+|format	|object array|	No|	Array of format objects representing the banner sizes permitted.|
+|w	|integer|	No|	Exact width in device independent pixels (DIPS); recommended if no format objects are specified.|
+|h	|integer|	No|	Exact height in device independent pixels (DIPS); recommended if no format objects are specified.|
+|id	|string	|Yes| Unique identifier for this banner object. Used when an Ad contains Banner and Video|
+|btype|	integer array	|No|	Blocked banner ad types. Refer to Banner Ad Types|
+|battr|	integer array	|No|	Blocked creative attributes. Refer to Creative Attributes|
+|pos|	integer|	No|	广告位置，Ad position on screen. Refer to Ad Position|
+|mimes|	string array|	Yes|	Content MIME types supported. Popular MIME types may include "application/x-shockwave-flash", "image/jpg", and "image/gif".|
+|~~topfram~~|	integer	|No| Indicates if the banner is in the top frame as opposed to an iframe, where 0 = no, 1 = yes.|
+|~~expdir~~|	integer array	|No|	Directions in which the banner may expand. Refer to List Expandable Direction|
+|api|	integer array	|No|	List of supported API frameworks for this impression. Refer to List API Frameworks If an API is not explicitly listed, it is assumed not to be supported.|
+|~~vcm~~|	integer	|No|	Relevant only for Banner objects used with a Video object in an array of companion ads. Indicates the companion banner rendering mode relative to the associated video, where 0 = concurrent, 1 = end-card.|
 
 ### Object: Video
 
