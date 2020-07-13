@@ -530,31 +530,15 @@ Standard attributes from IAB open RTB that are not supported by Mintegral ADX ar
  | ~~test~~| integer    |    No|    test mode|
  | at      |   integer    |    Yes|  Auction type, where 1 = First Price, 2 = Second Price Plus.|
  | tmax    |   integer    |    No|    Maximum time in milliseconds the exchange allows for bids to be received including internet latency to avoid timeout. This value supersedes any a priori guidance from the exchange.|
- | ~~wseat~~|   string array|   No|    White list of buyer seats (e.g., advertisers, agencies) allowed
-to bid on this impression. IDs of seats and knowledge of the
-buyer’s customers to which they refer must be coordinated
-between bidders and the exchange a priori. At most, only one
-of wseat and bseat should be used in the same request.
-Omission of both implies no seat restrictions.|
- | ~~bseat~~|    string array|   No|    Block list of buyer seats (e.g., advertisers, agencies) restricted
-from bidding on this impression. IDs of seats and knowledge
-of the buyer’s customers to which they refer must be
-coordinated between bidders and the exchange a priori. At
-most, only one of wseat and bseat should be used in the
-same request. Omission of both implies no seat restrictions.|
- | ~~allimps~~|   integer     |   No|     Flag to indicate if Exchange can verify that the impressions
-offered represent all of the impressions available in context
-(e.g., all on the web page, all video spots such as pre/mid/post
-roll) to support road-blocking. 0 = no or unknown, 1 = yes, the
-impressions offered represent all that are available.|
+ | ~~wseat~~|   string array|   No|    White list of buyer seats (e.g., advertisers, agencies) allowed to bid on this impression. IDs of seats and knowledge of the buyer’s customers to which they refer must be coordinated between bidders and the exchange a priori. At most, only one of wseat and bseat should be used in the same request. Omission of both implies no seat restrictions.|
+ | ~~bseat~~|    string array|   No|    Block list of buyer seats (e.g., advertisers, agencies) restricted from bidding on this impression. IDs of seats and knowledge of the buyer’s customers to which they refer must be coordinated between bidders and the exchange a priori. At most, only one of wseat and bseat should be used in the same request. Omission of both implies no seat restrictions.|
+ | ~~allimps~~|   integer     |   No|     Flag to indicate if Exchange can verify that the impressions offered represent all of the impressions available in context (e.g., all on the web page, all video spots such as pre/mid/post roll) to support road-blocking. 0 = no or unknown, 1 = yes, the impressions offered represent all that are available.|
  | ~~cur~~    |   string array|   No|   Array of allowed currencies for bids on this bid request using. ISO-4217 alpha codes. Recommended only if the exchange accepts multiple currencies.|
- | ~~wlang~~  |   string array|   No|   White list of languages for creatives using ISO-639-1-alpha-2. Omission implies no
-specific restrictions, but buyers would be advised to consider language attribute in
-the Device and/or Content objects if available.|
+ | ~~wlang~~  |   string array|   No|   White list of languages for creatives using ISO-639-1-alpha-2. Omission implies no specific restrictions, but buyers would be advised to consider language attribute in the Device and/or Content objects if available.|
  | bcat    | string array  | No    | Blocked advertiser categories using the IAB content categories. Refer to Appendix-Content Categories.|
  | badv    |  string array|  No|   Block list of advertisers by their domains (e.g., “ford.com”).|
  | bapp    |  string array|  No|     Block list of applications by their platform-specific exchange-independent
-application identifiers. ;  For example, on Android com.amazon.mShop; on IOS：*907394059* 
+application identifiers. For example, on Android com.amazon.mShop; on IOS：*907394059* 
  | ~~source~~|  object|   No|   A Sorce object (Section 3.2.2) that provides data about the inventory source and
 which entity makes the final decision.|
  | regs    | object  |  No|     A Regs object that specifies any industry, legal, or governmental regulations
