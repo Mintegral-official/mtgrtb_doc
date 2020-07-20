@@ -29,7 +29,7 @@
   * [Object: Title](#object-title)
   * [Object: Img](#object-img)
   * [Object: Data](#object-data)
-  * [Native Request Type 枚举值](#native-request-type-枚举值)
+  * [Native Request Type Enum](#native-request-type-Enum)
   * [Object: App](#object-app)
   * [Object: Publisher](#object-publisher)
   * [Object: Device](#object-device)
@@ -615,63 +615,64 @@ Standard attributes from IAB open RTB that are not supported by Mintegral ADX ar
 
 | Attribute	| Type |	Required	| Description |
 |---|---|---|---|
-| request | string | Yes|  表示 Native Ad Specification 定义的 native 标签协议； 具体见下文的 [NativeRequest 参数说明](#object-nativerequest)
-|ver |                 string        |  否        | 采用的 Dynamic Native Ads API 的版本|
-|api |     integer array  | No|        该次展示可支持的 API 框架；枚举值参考[附录API Frameworks](appendix.md#api-frameworks) |
-|battr    |integer array   |No|        限制的物料属性，枚举值参考[附录Creative Attributes](appendix.md#creative-attributes)|
+| request | string | Yes|  Refer to [NativeRequest](#object-nativerequest)
+|ver |                 string        |  No        | 	Version of the Dynamic Native Ads API to which request complies;
+highly recommended for efficient parsing.|
+|api |     integer array  | No|       List of supported API frameworks for this impression. Refer to[API Frameworks](appendix.md#api-frameworks) |
+|battr    |integer array   |No|        Blocked creative attributes. Refer to[Creative Attributes](appendix.md#creative-attributes)|
 
 ## Object: NativeRequest
 
 | Attribute	| Type |	Required	| Description |
 |---|---|---|---|
-|  ver                  |string         |No|         Native 标签协议版本（Native Markupversion）；默认值为 1.1；|
-|  ~~context~~          |integer        |No|         广告位所在的内容；|
-|  ~~contextsubtype~~   |integer        |No|         广告位所在的内容的Type；|
-|  ~~plcmttype~~        |integer        |No|         广告位Type；|
-|  ~~plcmtcnt~~         |integer        |No|         广告位所在页面的同类广告位数量；|
-|  ~~seq~~              |integer        |No|         广告位顺序；|
-|  assets    |object array   |Yes|         通过[Object Asset](#object-asset)表示 native 流量对素材和其他要素的要求, 广告返回的素材和其他要素必须符合该 object 要求；|
+|  ver                  |string         |No|         Native Markup version, default value 1.1|
+|  ~~context~~          |integer        |No|         The context in which the ad appears.|
+|  ~~contextsubtype~~   |integer        |No|         A more detailed context in which the ad appears.|
+|  ~~plcmttype~~        |integer        |No|         The design/format/layout of the ad unit being offered.|
+|  ~~plcmtcnt~~         |integer        |No|         The number of identical placements in this Layout.|
+|  ~~seq~~              |integer        |No|         Placement sequences.|
+|  assets    |object array   |Yes| An array of [Object Asset](#object-asset), Any bid response must comply with the array of elements expressed in the bid request.|
 
 ## Object: Asset
 
 | Attribute	| Type |	Required	| Description |
 |---|---|---|---|
-|  id                  |integer   |Yes|         对象唯一 id|
-|  required            |integer   |Yes|         表示该元素对象是否要求广告主必须返回值，0-不强制；1-必须强制返回|
-|  title    |object Title   |No|         表示标题；见 [title object](#object-title)|
-|  img      |object Img   |No|         表示图片；见 [img object](#object-img)|
-|  video   |object Video   |No|         表示视频；见 [video object](#object-video)|
-|  data    |object Data   |No|         表示其他信息，包括品牌名，Description，评级，价格等；见 [data object](#object-data)|
+|  id                  |integer   |Yes|         Unique asset ID.|
+|  required            |integer   |Yes| Set to 1 if asset is required (exchange will not accept a bid without it), 0 for not required.|
+|  title    |object Title   |No|         Refer to [title object](#object-title)|
+|  img      |object Img   |No|         Refer to [img object](#object-img)|
+|  video   |object Video   |No|         Refer to [video object](#object-video)|
+|  data    |object Data   |No|         Data object for brand name, description, ratings, prices etc. Refer to [data object](#object-data)|
 
 ## Object: Title
 
 | Attribute	| Type |	Required	| Description |
 |---|---|---|---|
-|len | integer | Yes| 最大字符数限制|
+|len | integer | Yes| Maximum length of the title.|
 
 ## Object: Img
 
-| Attribute | Type             | Required                  | Description                                               |
+| Attribute | Type             | Required |Description |
 |----------|------------------|-----------------------|---------------------|
-| type     | integer          | 否                        | 表示具体的图片Type，图片Type以及对应的枚举值如下： 1-icon；2-logo(针对 brand)；3-大图|
-| w        | integer          | 否                        | 图片宽度要求，单位pixel；                          |
-| ~~wmin~~ | integer          | 否                        | 最小宽度要求，单位pixel；                          |
-| h        | integer          | 图片高度要求，单位pixel； |                                                    |
-| ~~hmin~~ | integer          | 否                        | 最小高度要求，单位pixel；                          |
-| mimes    | array of strings | 否                        | 支持的图片 mime-type；包括但不仅限于“application/javascript”, “image/jpg”, “image/gif”；                             |
+| type     | integer          | No | Type of the image: 1-icon；2-logo(brand)；3-large picture|
+| w        | integer          | No | Exact width in device independent pixels (DIPS);                          |
+| ~~wmin~~ | integer          | No | Minimum width in device independent pixels (DIPS).                       |
+| h        | integer          | Exact height in device independent pixels (DIPS)|                                                    |
+| ~~hmin~~ | integer          | No | Minimum height in device independent pixels (DIPS).                          |
+| mimes    | array of strings | No | Content MIME types supported. Popular MIME types may include “application/javascript”, “image/jpg”, “image/gif”.                        |
 
 ## Object: Data
 
 | Attribute | Type    | Required | Description                                                                                          |
 |----------|---------|----------|---------------------------------------|
-| type     | integer | 是       | 表示 data object 对应的Type；每个 data object 对应一个 type； type 的枚举值见下方Object：Type |
-| len      | integer | 否       | 最大字符数限制；                                                                              |
+| type     | integer | Yes       | Type of the data object. Refer to [Native Request Type Enum](#native-request-type-Enum) |
+| len      | integer | No       | Maximum length of the text in the element’s response.|
 
-## Native Request Type 枚举值
+## Native Request Type Enum
 
-| Type ID | 名称       | Description                                                         | 返回格式要求               |
+| Type ID | Name       | Description | Required Type             |
 |---------|------------|--------------------------------------------------------------|----------------------------|
-| 1       | ~~sponsored~~  | 表示返回需要带上赞助商名称；                                 | text                       |
+| 1       | ~~sponsored~~  | Sponsor Name is required.                           | text                       |
 | 2       | desc       | 表示返回需要带上对推广产品或服务的Description；                     | text                       |
 | 3       | rating     | 表示返回需要带上产品的评分，比如 App store 0-5 的 APP 评分； | number formatted as string |
 | 4       | likes      | 表示返回需要带上产品的点赞数量；                             | number formatted as string |
@@ -688,59 +689,59 @@ Standard attributes from IAB open RTB that are not supported by Mintegral ADX ar
 
 | 字段名称      | Type         | Required | Description                                                            |
 |---------------|--------------|----------|------------|
-| id            | string;      | 否       | 表示 adx 内部的 APP id；                                        |
-| name          | string       | 否       | 表示 adx 内部的 APP 名称；                                      |
-| bundle        | string       | 否       | 商店应用的包名；安卓示例 com.foo.mygame；ios示例907394059;      |
-| domain        | string       | 否       | App 的域名，例如 mygame.foo.com                                 |
-| storeurl      | string       | 否       | APP 的商店链接地址；                                            |
-| cat           | string array | 否       | APP 的 IAB category；见附录Content Categories                   |
-| ~~sectioncat~~    | string array | 否       | 应用当前部分的IAB内容Type数组，枚举值参考附录Content Categories |
-| ~~pagecat~~       | string array | 否       | 应用当前视图的IAB内容Type数组，参考附录Content Categories       |
-| ver           | string       | 否       | APP 的版本号；                                                  |
-| ~~privacypolicy~~ | integer      | 否       | 表示该应用是否有隐私策略， 0-没有；1-有；                       |
-| paid          | integer      | 否       | 应用是否需要付费， 0-免费；1-付费；                             |
-| publisher     | object Publisher     | 否       | 表示开发者的具体信息，具体 Object Publisher                     |
-| content       | object       | 否       | Content对象， 该应用内容的详细信息                              |
-| keywords      | string       | 否       | 逗号分隔的应用的关键字信息                                      |
+| id            | string;      | No | Exchange-specific app ID.                                     |
+| name          | string       | No | App name                                      |
+| bundle        | string       | No | A platform-specific application identifier intended to be unique to the app and independent of the exchange. On Android, this should be a bundle or package name (e.g., com.foo.mygame). On iOS, it is typically a numeric ID.|
+| domain        | string       | No | Domain of the app (e.g., mygame.foo.com).                          |
+| storeurl      | string       | No | App store URL for an installed app; for IQG 2.1 compliance.    |
+| cat           | string array | No | Array of IAB content categories of the app. Refer to [Content Categories](appendix.md#content-categories).                   |
+| ~~sectioncat~~    | string array | No | Array of IAB content categories that describe the current section of the app.Refer to [Content Categories](appendix.md#content-categories).    |
+| ~~pagecat~~       | string array | No | Array of IAB content categories that describe the current page or view of the app. Refer to [Content Categories](appendix.md#content-categories).       |
+| ver           | string       | No | APP version                                                 |
+| ~~privacypolicy~~ | integer      | No | Indicates if the app has a privacy policy, where 0 = no, 1 = yes.                    |
+| paid          | integer      | No | 0 = app is free, 1 = the app is a paid version.                             |
+| publisher     | object Publisher     | No | Refer to Refer to [Object Publisher](#object-publisher).  |
+| content       | object       | No | Details about the Content within the app.                            |
+| keywords      | string       | No | Comma separated list of keywords about the app.             |
 
 ## Object: Publisher
 | Attribute | Type         | Required | Description                                          |
 |-----------|--------------|----------|------------------------------------------------------|
-| id        | string       | 否       | 表示 ADX 内部的开发者 id；                           |
-| ~~name~~      | string       | 否       | 开发者名称；                                         |
-| cat       | string array | 否       | 发布者的IAB内容Type数组， 参考附录Content Categories |
-| ~~domain~~    | string       | 否       | 发布者的顶级域名（例如， "publisher.com" )；         |
+| id        | string       | No | Exchange-specific publisher ID.                          |
+| ~~name~~      | string       | No | Publisher name.                                      |
+| cat       | string array | No | Array of IAB content categories that describe the publisher. Refer to [Content Categories](appendix.md#content-categories).      |
+| ~~domain~~    | string       | No | Highest level domain of the publisher (e.g., “publisher.com”).         |
 
 ## Object: Device
 
 | Attribute       | Type    | Required | Description                                                                                                                                                              |
 |----------------|---------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ua             | string  | 否       | 用户设备 HTTP 请求头中的 User-Agent 字段；                                                                                                                        |
-| geo            | object  | 否       | 表示用户当前位置；                                                                                                                                                |
-| dnt            | integer | 否       | 浏览器在 HTTP 头中设置的标准的“Do Not Track"标识， 0-不限制追踪；1-限制（不允许）追踪 注意，该字段值Type定义与open RTB 2.4版本协议有所不同                        |
-| lmt            | integer | 否       | “限制广告追踪”表示用户对商业追踪行为的授权， 值为 0-不限制追踪；1-限制追踪 注意，该字段值Type定义与open RTB 2.4版本协议有所不同                                   |
-| ip             | string  | 是       | 最接近设备的 IPv4 地址；                                                                                                                                          |
-| ~~ipv6~~           | string  | 否       | 最接近设备的 Ipv6 地址；                                                                                                                                          |
-| devicetype     | integer | 是       | 设备Type；枚举值参考附录Device Type                                                                                                                               |
-| make           | string  | 是       | 设备制造商，比如“Apple”，未知传 unknown                                                                                                                           |
-| model          | string  | 是       | 1） android 设备:调用系统接口android.os.Build.MODEL 直接获得； 2） ios 设备：对系统接口返回原始值做转换后得到，取值例如 iPhone5 、 iPhone6s 、 iPhone 6sPlus 等； |
-| os             | string  | 是       | 操作系统；未知传 unknown                                                                                                                                          |
-| osv            | string  | 是       | Os 版本；三段式或两段式版本号；                                                                                                                                   |
-| hwv            | string  | 否       | 设备硬件版本， 例如 “5S”；                                                                                                                                        |
-| h              | integer | 否       | 屏幕的物理高度， 以像素为单位；                                                                                                                                   |
-| w              | integer | 否       | 屏幕的物理宽度，以像素为单位；                                                                                                                                    |
-| ~~ppi~~            | integer | 否       | 以像素每英寸表示的屏幕尺寸；                                                                                                                                      |
-|~~pxratio~~        | float   | 否       | 设备物理像素与设备无关像素的比率；                                                                                                                                |
-| js             | integer | 否       | 支持javascript, 0-不支持；1-支持；                                                                                                                                |
-| ~~geofetch~~       | integer | 否       | 表示该广告位是否为JavaScript代码提供geolocaion API， 0-不提供；1-提供                                                                                             |
-| ~~flashver~~       | string  | 否       | 浏览器支持的Flash版本；                                                                                                                                           |
-| language       | string  | 是       | 设备语言；使用 ISO-639-1-alpha-2；未知传unknown                                                                                                                   |
-| carrier        | string  | 是       | 运营商；字段值采用 MCC 和 MNC 结合的代码， 如46001 表示中国联通；未知传 unknown；                                                                                 |
-| ~~mccmnc~~         | string  | 否       | 运营商mcc-mnc代码；                                                                                                                                               |
-| connectiontype | integer | 是       | 网络连接Type；枚举值参考附录Connection Type                                                                                                                       |
-| ifa            | string  | 否       | 广告主标识， 明文表示； Ios 传 idfa，必传； Android 国外传 gaid，国内不传；                                                                                       |
-| imei           | string  | 否       | 硬件设备 ID，安卓传 IMEI                                                                                                                                          |
-| android_id     | string  | 否       | 设备平台 ID，安卓传 Android ID                                                                                                                                    |
+| ua             | string  | No | 用户设备 HTTP 请求头中的 User-Agent 字段；                                                                                                                        |
+| geo            | object  | No | 表示用户当前位置；                                                                                                                                                |
+| dnt            | integer | No | 浏览器在 HTTP 头中设置的标准的“Do Not Track"标识， 0-不限制追踪；1-限制（不允许）追踪 注意，该字段值Type定义与open RTB 2.4版本协议有所不同                        |
+| lmt            | integer | No | “限制广告追踪”表示用户对商业追踪行为的授权， 值为 0-不限制追踪；1-限制追踪 注意，该字段值Type定义与open RTB 2.4版本协议有所不同                                   |
+| ip             | string  | Yes | 最接近设备的 IPv4 地址；                                                                                                                                          |
+| ~~ipv6~~           | string  | No | 最接近设备的 Ipv6 地址；                                                                                                                                          |
+| devicetype     | integer | Yes | 设备Type；枚举值参考附录Device Type                                                                                                                               |
+| make           | string  | Yes | 设备制造商，比如“Apple”，未知传 unknown                                                                                                                           |
+| model          | string  | Yes | 1） android 设备:调用系统接口android.os.Build.MODEL 直接获得； 2） ios 设备：对系统接口返回原始值做转换后得到，取值例如 iPhone5 、 iPhone6s 、 iPhone 6sPlus 等； |
+| os             | string  | Yes | 操作系统；未知传 unknown                                                                                                                                          |
+| osv            | string  | Yes | Os 版本；三段式或两段式版本号；                                                                                                                                   |
+| hwv            | string  | No | 设备硬件版本， 例如 “5S”；                                                                                                                                        |
+| h              | integer | No | 屏幕的物理高度， 以像素为单位；                                                                                                                                   |
+| w              | integer | No | 屏幕的物理宽度，以像素为单位；                                                                                                                                    |
+| ~~ppi~~            | integer | No | 以像素每英寸表示的屏幕尺寸；                                                                                                                                      |
+|~~pxratio~~        | float   | No | 设备物理像素与设备无关像素的比率；                                                                                                                                |
+| js             | integer | No | 支持javascript, 0-不支持；1-支持；                                                                                                                                |
+| ~~geofetch~~       | integer | No | 表示该广告位是否为JavaScript代码提供geolocaion API， 0-不提供；1-提供                                                                                             |
+| ~~flashver~~       | string  | No | 浏览器支持的Flash版本；                                                                                                                                           |
+| language       | string  | Yes | 设备语言；使用 ISO-639-1-alpha-2；未知传unknown                                                                                                                   |
+| carrier        | string  | Yes | 运营商；字段值采用 MCC 和 MNC 结合的代码， 如46001 表示中国联通；未知传 unknown；                                                                                 |
+| ~~mccmnc~~         | string  | No | 运营商mcc-mnc代码；                                                                                                                                               |
+| connectiontype | integer | Yes | 网络连接Type；枚举值参考附录Connection Type                                                                                                                       |
+| ifa            | string  | No | 广告主标识， 明文表示； Ios 传 idfa，必传； Android 国外传 gaid，国内不传；                                                                                       |
+| imei           | string  | No | 硬件设备 ID，安卓传 IMEI                                                                                                                                          |
+| android_id     | string  | No | 设备平台 ID，安卓传 Android ID                                                                                                                                    |
 | didsha1        | string  |          | 硬件设备 ID，安卓传 IMEI，使用 SHA1 哈希算法；                                                                                                                    |
 | didmd5         | string  |          | 硬件设备 ID，安卓传 IMEI，使用 md5 哈希算法；                                                                                                                     |
 | dpidsha1       | string  |          | 设备平台 ID，安卓传 Android ID，使用 SHA1 哈希算法；                                                                                                              |
@@ -750,25 +751,25 @@ Standard attributes from IAB open RTB that are not supported by Mintegral ADX ar
 
 | Attribute      | Type    | Required | Description                                                                                                                                                                                                               |
 |---------------|---------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| lat           | float   | 否       | 纬度信息，取值范围-90.0到+90.0， 负值表示南方；                                                                                                                                                                   |
-| lon           | float   | 否       | 经度信息，取值返回-180.0到+180.0， 负值表示西方；                                                                                                                                                                |
-| type          | integer | 否       | 位置信息的源；值为 1 表示 GPS/定位服务；值为 2 表示 IP 地址； 值为 3 表示用户提供；                                                                                                                                |
-| ~~accuracy~~      | integer | 否       | 精度，详细到米；当经纬度是通过定位服务获取时，上报该字段；                                                                                                                                                         |
-| ~~lastfix~~       | integer | 否       | 生成竞价请求的时间和设备最后一次获取地理位置的时间之间的差别，这个时间差的单位：秒 请注意：设备可能缓存多个不同时间获取的地理位置数据。 在理想状况下，这个数值应该是从此竞价请求里包含的地理位置获取时间开始计算的 |
-| ~~ipservice~~    | integer | 否       | 从IP地址分析地理位置的服务方或者供应商（当type = 2的时候）;                                                                                                                                                        |
-| country       | string  | 否       | ISO-3166-1 Alpha-3 国家码；                                                                                                                                                                                  |
-| region        | string  | 否       | ISO-3166-2 区域码；                                                                                                                                                                                              |
-|~~regionfips10~~ | string  | 否       | 国家的区域，使用FIPS 10-4 notation 编码表示，也可用 ISO 3166-2编码表示；                                                                                                                                       |
-| metro         | string  | 否       | 谷歌metro code Metro codes 与 Nielsen DMAs 相似，但有一些差异                                                                                                                                                      |
-| city          | string  | 否       | 城市名称使用联合国贸易与运输位置码                                                                                                                                                                                 |
-| zip           | string  | 否       | 邮政编码或者邮递区号；                                                                                                                                                                                             |
-|~~utcoffse~~     | integer | 否       | 本地时间，用比标准UTC时间多加或减少的分钟数来表示；                                                                                                                                                                |
+| lat           | float   | No | 纬度信息，取值范围-90.0到+90.0， 负值表示南方；                                                                                                                                                                   |
+| lon           | float   | No | 经度信息，取值返回-180.0到+180.0， 负值表示西方；                                                                                                                                                                |
+| type          | integer | No | 位置信息的源；值为 1 表示 GPS/定位服务；值为 2 表示 IP 地址； 值为 3 表示用户提供；                                                                                                                                |
+| ~~accuracy~~      | integer | No | 精度，详细到米；当经纬度是通过定位服务获取时，上报该字段；                                                                                                                                                         |
+| ~~lastfix~~       | integer | No | 生成竞价请求的时间和设备最后一次获取地理位置的时间之间的差别，这个时间差的单位：秒 请注意：设备可能缓存多个不同时间获取的地理位置数据。 在理想状况下，这个数值应该是从此竞价请求里包含的地理位置获取时间开始计算的 |
+| ~~ipservice~~    | integer | No | 从IP地址分析地理位置的服务方或者供应商（当type = 2的时候）;                                                                                                                                                        |
+| country       | string  | No | ISO-3166-1 Alpha-3 国家码；                                                                                                                                                                                  |
+| region        | string  | No | ISO-3166-2 区域码；                                                                                                                                                                                              |
+|~~regionfips10~~ | string  | No | 国家的区域，使用FIPS 10-4 notation 编码表示，也可用 ISO 3166-2编码表示；                                                                                                                                       |
+| metro         | string  | No | 谷歌metro code Metro codes 与 Nielsen DMAs 相似，但有一些差异                                                                                                                                                      |
+| city          | string  | No | 城市名称使用联合国贸易与运输位置码                                                                                                                                                                                 |
+| zip           | string  | No | 邮政编码或者邮递区号；                                                                                                                                                                                             |
+|~~utcoffse~~     | integer | No | 本地时间，用比标准UTC时间多加或减少的分钟数来表示；                                                                                                                                                                |
 
 ## Object: Regs
 
 | Attribute | Type    | Required | Description                                                                                                                                  |
 |----------|---------|----------|---------------------------------|
-| coppa    | integer | 否       | 表示该次展示是否遵从 COPPA 法案， 0-不遵从；1-遵从； 对于遵从 COPPA 法案的展示，DSP 必须保证返回的广告的内容和素材符合 COPPA 广告规定 |
+| coppa    | integer | No | 表示该次展示是否遵从 COPPA 法案， 0-不遵从；1-遵从； 对于遵从 COPPA 法案的展示，DSP 必须保证返回的广告的内容和素材符合 COPPA 广告规定 |
 
 # 返回接口说明
 
@@ -778,112 +779,112 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
 ## Object: BidResponse
 | Attribute | Type         | Required | Description                                                      |
 |----------|--------------|----------|-----------------------------------------------------------|
-| id       | string;      | 是       | 竞价请求的标识，即请求带的 request id；                   |
-| seatbid  | object array | 是       | 一组 SeatBid 对象， 如果出价，则至少应该填充一个seatbid； |
-| bidid    | string       | 否       | 竞拍者生成的响应 ID, 辅助日志或者交易追踪；               |
-| cur      | string;      | 否       | 出价货币单位，使用 ISO-4217 码；不传默认 USD              |
-| nbr      | integer      | 否       | 不出价原因；                                              |
+| id       | string;      | Yes | 竞价请求的标识，即请求带的 request id；                   |
+| seatbid  | object array | Yes | 一组 SeatBid 对象， 如果出价，则至少应该填充一个seatbid； |
+| bidid    | string       | No | 竞拍者生成的响应 ID, 辅助日志或者交易追踪；               |
+| cur      | string;      | No | 出价货币单位，使用 ISO-4217 码；不传默认 USD              |
+| nbr      | integer      | No | 不出价原因；                                              |
 
 ## Object: Seatbid
 
 | Attribute | Type         | Required | Description                                                                                                   |
 |----------|--------------|----------|--------------------------------------------------------------------------------------------------------|
-| bid      | object array | 是       | 至少一个 Bid 对象的数组，每个对象关联一个展示。                                                        |
-| seat     | string       | 否       | 出价者席位标识， 代表本次出价的出价人；                                                                |
-| group    | integer      | 否       | 1 = 出价方要求对所有展示的出价必须整组胜出，或失败; 0 = 对某一展示的一次出价可以独立胜出，默认值 = 0 ; |
+| bid      | object array | Yes | 至少一个 Bid 对象的数组，每个对象关联一个展示。                                                        |
+| seat     | string       | No | 出价者席位标识， 代表本次出价的出价人；                                                                |
+| group    | integer      | No | 1 = 出价方要求对所有展示的出价必须整组胜出，或失败; 0 = 对某一展示的一次出价可以独立胜出，默认值 = 0 ; |
 
 ## Object: Bid
 | Attribute       | Type          | Required             | Description                                                                                                                                                      |
 |----------------|---------------|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| id             | string        | 是                   | 竞拍者生成的竞价 ID，用于记录日志或行为追踪；                                                                                                             |
-| impid          | string        | 是                   | 关联的竞价请求中的 Imp 对象的 ID；                                                                                                                        |
-| price          | float         | 是                   | 对该次展示的出价，以 CPM 表示；                                                                                                                           |
-| nurl           | string        | 是                   | 胜出通知链接；MTG adx将在广告成功展示时调用该链接；                                                                                                       |
-| burl           | string        | 否                   | 可计费展示回调；                                                                                                                                          |
-| lurl           | string        | 否                   | 竞价失败回调；                                                                                                                                            |
-| adm            | string        | 是                   | 广告素材标记；Native广告形式返回native response； 视频广告形式返回VAST XML;Banner广告形式返回xhtml；                                                      |
-| adid           | string        | 否                   | 竞价的广告的ID， 如果交易胜出，该广告会被发送给媒体；                                                                                                     |
-| adomain        | string array  | 是                   | 广告主域名， 用于过滤检测；                                                                                                                               |
+| id             | string        | Yes | 竞拍者生成的竞价 ID，用于记录日志或行为追踪；                                                                                                             |
+| impid          | string        | Yes | 关联的竞价请求中的 Imp 对象的 ID；                                                                                                                        |
+| price          | float         | Yes | 对该次展示的出价，以 CPM 表示；                                                                                                                           |
+| nurl           | string        | Yes | 胜出通知链接；MTG adx将在广告成功展示时调用该链接；                                                                                                       |
+| burl           | string        | No | 可计费展示回调；                                                                                                                                          |
+| lurl           | string        | No | 竞价失败回调；                                                                                                                                            |
+| adm            | string        | Yes | 广告素材标记；Native广告形式返回native response； 视频广告形式返回VAST XML;Banner广告形式返回xhtml；                                                      |
+| adid           | string        | No | 竞价的广告的ID， 如果交易胜出，该广告会被发送给媒体；                                                                                                     |
+| adomain        | string array  | Yes | 广告主域名， 用于过滤检测；                                                                                                                               |
 | bundle         | string        | 是（下载类广告必传） | 应用的包名信息； 安卓包名示例 com.foo.mygame；ios 包名示例907394059；                                                                                     |
-| iurl           | string        | 否                   | 用于质量或者安全监测的表示广告活动内容的图像地址；                                                                                                        |
-| cid            | string        | 否                   | 广告 id，辅助广告审核；iurl 代表的一组素材                                                                                                                |
-| crid           | string        | 否                   | 一组素材的 id；辅助广告审核                                                                                                                               |
-| tactic         | string        | 否                   | 广告投放策略id；                                                                                                                                          |
-| cat            | string array  | 是                   | creative 的 IAB 内容Type；枚举值参考附录Content Categories                                                                                                |
-| attr           | integer array | 否                   | Description creative 的属性集合；枚举值参考附录Creative Attributes                                                                                               |
-| api            | integer       | 否                   | 该次展示可支持的 API 框架；枚举值参考附录API Frameworks                                                                                                   |
-| protocols      | integer       | 否                   | 支持的视频竞价响应协议；枚举值参考附录Protocols                                                                                                           |
-| qagmediarating | integer       | 是                   | 表示根据 IAB IGQ 标准的素材内容等级； 枚举值参考附录IQG Media Ratings                                                                                     |
-| language       | string        | 否                   | 素材语言；设备语言；使用 ISO-639-1-alpha-2；                                                                                                              |
-| dealid         | string        | 否                   | 如果该竞价从属于某个私有市场交易， 这个参数包含这个私有市场交易的交易ID； 如果竞拍的展示从属于某个私有市场交易， 那么该竞价必须包含相同的私有市场交易的ID |
-| w              | integer       | 否                   | 广告的宽度，单位：像素。                                                                                                                                  |
-| h              | integer       | 否                   | 广告的高度，单位：像素。                                                                                                                                  |
-| wratio         | integer       | 否                   | 广告的相对宽度，单位：像素。                                                                                                                              |
-| hratio         | integer       | 否                   | 广告的相对高度，单位：像素。                                                                                                                              |
-| exp            | integer       | 否                   | 广告从返回到实际展示的有效延迟时间，单位为秒；默认值为 3600；                                                                                             |
-| ext            | object ext       | 否                   | 具体见 ext object                                                                                                                                         |
+| iurl           | string        | No | 用于质量或者安全监测的表示广告活动内容的图像地址；                                                                                                        |
+| cid            | string        | No | 广告 id，辅助广告审核；iurl 代表的一组素材                                                                                                                |
+| crid           | string        | No | 一组素材的 id；辅助广告审核                                                                                                                               |
+| tactic         | string        | No | 广告投放策略id；                                                                                                                                          |
+| cat            | string array  | Yes | creative 的 IAB 内容Type；枚举值参考附录Content Categories                                                                                                |
+| attr           | integer array | No | Description creative 的属性集合；枚举值参考附录Creative Attributes                                                                                               |
+| api            | integer       | No | 该次展示可支持的 API 框架；枚举值参考附录API Frameworks                                                                                                   |
+| protocols      | integer       | No | 支持的视频竞价响应协议；枚举值参考附录Protocols                                                                                                           |
+| qagmediarating | integer       | Yes | 表示根据 IAB IGQ 标准的素材内容等级； 枚举值参考附录IQG Media Ratings                                                                                     |
+| language       | string        | No | 素材语言；设备语言；使用 ISO-639-1-alpha-2；                                                                                                              |
+| dealid         | string        | No | 如果该竞价从属于某个私有市场交易， 这个参数包含这个私有市场交易的交易ID； 如果竞拍的展示从属于某个私有市场交易， 那么该竞价必须包含相同的私有市场交易的ID |
+| w              | integer       | No | 广告的宽度，单位：像素。                                                                                                                                  |
+| h              | integer       | No | 广告的高度，单位：像素。                                                                                                                                  |
+| wratio         | integer       | No | 广告的相对宽度，单位：像素。                                                                                                                              |
+| hratio         | integer       | No | 广告的相对高度，单位：像素。                                                                                                                              |
+| exp            | integer       | No | 广告从返回到实际展示的有效延迟时间，单位为秒；默认值为 3600；                                                                                             |
+| ext            | object ext       | No | 具体见 ext object                                                                                                                                         |
 
 ## Object: Ext
 
 | Attribute    | Type             | Required | Description                                                     |
 |-------------|------------------|----------|----------------------------------------------------------|
-| imptrackers | string array | 否       | 展示监测链接数组；Interative必传广告形式的展示监测链接； |
+| imptrackers | string array | No | 展示监测链接数组；Interative必传广告形式的展示监测链接； |
 
 ## Object: NativeResponse
 
 | Attribute    | Type             | Required | Description                                                                                                                               |
 |-------------|------------------|----------|------------------------------------------------------------------------------------------------------------------------------------|
-| ver         | string           | 否       | Native 标签协议的版本                                                                                                              |
-| assets      | array of objects | 是       | Native 广告素材列表；具体见 assets object                                                                                          |
-| link        | object           | 是       | 广告的点击跳转链接；具体见 link object；注意，我们不支持素材单独的点击跳转链接                                                     |
-| imptrackers | strings array    | 是       | 展示监测链接数组；Mintegral ADX 在客户端发生广告展示时调用展示监测 url 上报展示 注意：我们不支持素材自带的 impression pixel 监测； |
-| jstracker   | string           | 否       | Javascript展示监测代码；                                                                                                           |
+| ver         | string           | No | Native 标签协议的版本                                                                                                              |
+| assets      | array of objects | Yes | Native 广告素材列表；具体见 assets object                                                                                          |
+| link        | object           | Yes | 广告的点击跳转链接；具体见 link object；注意，我们不支持素材单独的点击跳转链接                                                     |
+| imptrackers | strings array    | Yes | 展示监测链接数组；Mintegral ADX 在客户端发生广告展示时调用展示监测 url 上报展示 注意：我们不支持素材自带的 impression pixel 监测； |
+| jstracker   | string           | No | Javascript展示监测代码；                                                                                                           |
 
 ## Object: Asset
 | 参数     | Type    | Required                            | Description                                                          |
 |----------|---------|-------------------------------------|---------------------------------------------------------------|
-| id       | integer | 是                                  | Asset 的唯一识别 ID,与 exchange 请求时的 assetid 必须一一对应 |
-| required | integer | 否                                  | 是否强制必传；与 exchange 请求时的 asset require字段值一致    |
+| id       | integer | Yes | Asset 的唯一识别 ID,与 exchange 请求时的 assetid 必须一一对应 |
+| required | integer | No | 是否强制必传；与 exchange 请求时的 asset require字段值一致    |
 | title    | object  | 当请求有该 asset 且要求必传时，必传 | 回传标题信息；具体见 Object Title                             |
 | img      | object  | 当请求有该 asset 且要求必传时，必传 | 回传图片信息；具体见 Object Img                               |
 | video    | object  | 当请求有该 asset 且要求必传时，必传 | 回传视频信息；具体见 Object Video                             |
 | data     | object  | 当请求有该 asset 且要求必传时，必传 | 回传其他数据信息；具体见 Object Data                          |
-| link     | object  | 是                                  | 链接信息；见Object Link                                       |
+| link     | object  | Yes | 链接信息；见Object Link                                       |
 
 ### Object: Asset.Title
 
 | Attribute | Type   | Required | Description       |
 |----------|--------|----------|------------|
-| text     | String | 是       | 标题文字； |
+| text     | String | Yes | 标题文字； |
 
  ### Object: Asset.Img
  
 | Attribute | Type    | Required | Description                   |
 |----------|---------|----------|------------------------|
-| url      | string  | 是       | 图片素材的 url 地址    |
-| w        | integer | 是       | 图片的宽度，单位为像素 |
-| h        | integer | 是       | 图片的高度，单位为像素 | 
+| url      | string  | Yes | 图片素材的 url 地址    |
+| w        | integer | Yes | 图片的宽度，单位为像素 |
+| h        | integer | Yes | 图片的高度，单位为像素 | 
 
 ### Object: Asset.Video
 
 | Attribute | Type   | Required | Description       |
 |----------|--------|----------|------------|
-| vasttag     | string | 否       | 视频vast xml|
+| vasttag     | string | No | 视频vast xml|
 
 ### Object: Asset.Data 
 
 | Attribute | Type   | Required | Description       |
 |----------|--------|----------|------------|
-| label     | string | 否       | Data 对应的名称；若传则严格按照 Data type 表的 name 传值|
-| value     | string | 是       | Data 的具体内容；根据具体每个 data type 的要求返回值|
+| label     | string | No | Data 对应的名称；若传则严格按照 Data type 表的 name 传值|
+| value     | string | Yes | Data 的具体内容；根据具体每个 data type 的要求返回值|
 
 ### Object: Asset.Link
 
-| Attribute      | Type             | 是否必��� | Description                   |
+| Attribute      | Type             | Required | Description                   |
 |---------------|------------------|----------|------------------------|
-| url           | string           | 是       | 点击跳转 url 地址      |
-| clicktrackers | array of strings | 否       | 第三方点击监测链接数组 |
-| fallback      | string           | 否       | 备用点击跳转url        |
+| url           | string           | Yes | 点击跳转 url 地址      |
+| clicktrackers | array of strings | No | 第三方点击监测链接数组 |
+| fallback      | string           | No | 备用点击跳转url        |
 
 
 # No bidding 说明
