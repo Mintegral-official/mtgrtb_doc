@@ -616,8 +616,7 @@ Standard attributes from IAB open RTB that are not supported by Mintegral ADX ar
 | Attribute	| Type |	Required	| Description |
 |---|---|---|---|
 | request | string | Yes|  Refer to [NativeRequest](#object-nativerequest)
-|ver |                 string        |  No        | 	Version of the Dynamic Native Ads API to which request complies;
-highly recommended for efficient parsing.|
+|ver |                 string        |  No        | 	Version of the Dynamic Native Ads API to which request complies;|
 |api |     integer array  | No|       List of supported API frameworks for this impression. Refer to[API Frameworks](appendix.md#api-frameworks) |
 |battr    |integer array   |No|        Blocked creative attributes. Refer to[Creative Attributes](appendix.md#creative-attributes)|
 
