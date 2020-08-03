@@ -572,7 +572,7 @@ Standard attributes from IAB open RTB that are not supported by Mintegral ADX ar
 |id	|string	|Yes| Unique identifier for this banner object. Used when an Ad contains Banner and Video|
 |btype|	integer array	|No|	Blocked banner ad types. Refer to Banner Ad Types|
 |battr|	integer array	|No|	Blocked creative attributes. Refer to Creative Attributes|
-|pos|	integer|	No|	广告位置，Ad position on screen. Refer to Ad Position|
+|pos|	integer|	No|	Ad position on screen. Refer to Ad Position|
 |mimes|	string array|	Yes|	Content MIME types supported. Popular MIME types may include "application/x-shockwave-flash", "image/jpg", and "image/gif".|
 |~~topfram~~|	integer	|No| Indicates if the banner is in the top frame as opposed to an iframe, where 0 = no, 1 = yes.|
 |~~expdir~~|	integer array	|No|	Directions in which the banner may expand. Refer to List Expandable Direction|
@@ -686,7 +686,7 @@ Standard attributes from IAB open RTB that are not supported by Mintegral ADX ar
 
 ## Object: App
 
-| 字段名称      | Type         | Required | Description                                                            |
+| Name      | Type         | Required | Description                                                            |
 |---------------|--------------|----------|------------|
 | id            | string;      | No | Exchange-specific app ID.                                     |
 | name          | string       | No | App name                                      |
@@ -715,60 +715,61 @@ Standard attributes from IAB open RTB that are not supported by Mintegral ADX ar
 
 | Attribute       | Type    | Required | Description                                                                                                                                                              |
 |----------------|---------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ua             | string  | No | 用户设备 HTTP 请求头中的 User-Agent 字段；                                                                                                                        |
-| geo            | object  | No | 表示用户当前位置；                                                                                                                                                |
-| dnt            | integer | No | 浏览器在 HTTP 头中设置的标准的“Do Not Track"标识， 0-不限制追踪；1-限制（不允许）追踪 注意，该字段值Type定义与open RTB 2.4版本协议有所不同                        |
-| lmt            | integer | No | “限制广告追踪”表示用户对商业追踪行为的授权， 值为 0-不限制追踪；1-限制追踪 注意，该字段值Type定义与open RTB 2.4版本协议有所不同                                   |
-| ip             | string  | Yes | 最接近设备的 IPv4 地址；                                                                                                                                          |
-| ~~ipv6~~           | string  | No | 最接近设备的 Ipv6 地址；                                                                                                                                          |
-| devicetype     | integer | Yes | 设备Type；枚举值参考附录Device Type                                                                                                                               |
-| make           | string  | Yes | 设备制造商，比如“Apple”，未知传 unknown                                                                                                                           |
-| model          | string  | Yes | 1） android 设备:调用系统接口android.os.Build.MODEL 直接获得； 2） ios 设备：对系统接口返回原始值做转换后得到，取值例如 iPhone5 、 iPhone6s 、 iPhone 6sPlus 等； |
-| os             | string  | Yes | 操作系统；未知传 unknown                                                                                                                                          |
-| osv            | string  | Yes | Os 版本；三段式或两段式版本号；                                                                                                                                   |
-| hwv            | string  | No | 设备硬件版本， 例如 “5S”；                                                                                                                                        |
-| h              | integer | No | 屏幕的物理高度， 以像素为单位；                                                                                                                                   |
-| w              | integer | No | 屏幕的物理宽度，以像素为单位；                                                                                                                                    |
-| ~~ppi~~            | integer | No | 以像素每英寸表示的屏幕尺寸；                                                                                                                                      |
-|~~pxratio~~        | float   | No | 设备物理像素与设备无关像素的比率；                                                                                                                                |
-| js             | integer | No | 支持javascript, 0-不支持；1-支持；                                                                                                                                |
-| ~~geofetch~~       | integer | No | 表示该广告位是否为JavaScript代码提供geolocaion API， 0-不提供；1-提供                                                                                             |
-| ~~flashver~~       | string  | No | 浏览器支持的Flash版本；                                                                                                                                           |
-| language       | string  | Yes | 设备语言；使用 ISO-639-1-alpha-2；未知传unknown                                                                                                                   |
-| carrier        | string  | Yes | 运营商；字段值采用 MCC 和 MNC 结合的代码， 如46001 表示中国联通；未知传 unknown；                                                                                 |
-| ~~mccmnc~~         | string  | No | 运营商mcc-mnc代码；                                                                                                                                               |
-| connectiontype | integer | Yes | 网络连接Type；枚举值参考附录Connection Type                                                                                                                       |
-| ifa            | string  | No | 广告主标识， 明文表示； Ios 传 idfa，必传； Android 国外传 gaid，国内不传；                                                                                       |
-| imei           | string  | No | 硬件设备 ID，安卓传 IMEI                                                                                                                                          |
-| android_id     | string  | No | 设备平台 ID，安卓传 Android ID                                                                                                                                    |
-| didsha1        | string  |          | 硬件设备 ID，安卓传 IMEI，使用 SHA1 哈希算法；                                                                                                                    |
-| didmd5         | string  |          | 硬件设备 ID，安卓传 IMEI，使用 md5 哈希算法；                                                                                                                     |
-| dpidsha1       | string  |          | 设备平台 ID，安卓传 Android ID，使用 SHA1 哈希算法；                                                                                                              |
-| dpidmd5        | string  |          | 设备平台 ID，安卓传 Android ID，使用 md5 哈希算法；                                                                                                               |
+| ua             | string  | No | Browser user agent string. |
+| geo            | object  | No | Location of the device assumed to be the user’s current location defined by a [Geo object](#object-geo).
+| dnt            | integer | No | Standard “Do Not Track” flag as set in the header by the browser, where 0 = tracking is unrestricted, 1 = do not track. Please note that this attribute has changed with regard to open RTB 2.4                |
+| lmt            | integer | No | “Limit Ad Tracking” signal commercially endorsed (e.g., iOS, Android), where 0 = tracking is unrestricted, 1 = tracking must be limited per commercial guidelines.  Please note that this attribute has changed with regard to open RTB 2.4 |
+| ip             | string  | Yes | IPv4 address closest to device.                                                                                                                |
+| ~~ipv6~~           | string  | No | IP address closest to device as IPv6.                                                                                                                                |
+| devicetype     | integer | Yes | The general type of device. Please refer to [Device Type](appendix.md#device-type)     |
+| make           | string  | Yes | Device make (e.g., “Apple”, "unknown").                                                                                                |
+| model          | string  | Yes | Device model. 1)On android , obtained from the system interface android.os.Build.MODEL; 2) On ios, obtained from system API , e.g.,  “iPhone5”, "iPhone6s", "iPhone 6s Plus".|
+| os             | string  | Yes |   Device operating system (e.g., “iOS”, "unknown").                                                                                       |
+| osv            | string  | Yes | Device operating system version (e.g., “3.1.2”). |
+| hwv            | string  | No | Hardware version of the device (e.g., “5S” for iPhone 5S).                                                                |
+| h              | integer | No | Physical height of the screen in pixels.                                                                      |
+| w              | integer | No | Physical width of the screen in pixels.                                                                   |
+| ~~ppi~~            | integer | No | Screen size as pixels per linear inch.                                                                    |
+|~~pxratio~~        | float   | No | The ratio of physical pixels to device independent pixels.                                                    |
+| js             | integer | No | Support for JavaScript, where 0 = no, 1 = yes.                                                       |
+| ~~geofetch~~       | integer | No | Indicates if the geolocation API will be available to JavaScript code running in the banner, where 0 = no, 1 = yes.|
+| ~~flashver~~       | string  | No | Version of Flash supported by the browser.                                                                                   |
+| language       | string  | Yes | Browser language using ISO-639-1-alpha-2. "unknown" for unknown.                                                               |
+| carrier        | string  | Yes | Mobile carrier as the concatenated MCC-MNC code (e.g., “310005” identifies Verizon Wireless CDMA in the USA). "unknown" for unknown.  |
+| ~~mccmnc~~         | string  | No | Mobile carrier as the concatenated MCC-MNC code (e.g., “310-005” identifies Verizon Wireless CDMA in the USA).|
+| connectiontype | integer | Yes | Network connection type. Refer to [Appendix Connection Type](appendix.md#connection-type)  |
+| ifa            | string  | No | ID sanctioned for advertiser use in the clear.(i.e., not hashed). For IOS, this attribute shoube the idfa, and it is a required attribute. For Android, this attribute should be the gaid, it is only required for developers outside mainland China.|
+| imei           | string  | No | Hardware device ID,IMEI                                                                                            |
+| android_id     | string  | No | Platform device ID,Android ID                                                                                         |
+| didsha1        | string  |          | Hardware device ID (e.g., IMEI); hashed via SHA1.                                                                 |
+| didmd5         | string  |          | Hardware device ID (e.g., IMEI); hashed via MD5.                                                        |
+| dpidsha1       | string  |          | Platform device ID (e.g., Android ID); hashed via SHA1.                                                           |
+| dpidmd5        | string  |          | Platform device ID (e.g., Android ID); hashed via MD5.                                            |
 
 ## Object: Geo
 
 | Attribute      | Type    | Required | Description                                                                                                                                                                                                               |
 |---------------|---------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| lat           | float   | No | 纬度信息，取值范围-90.0到+90.0， 负值表示南方；                                                                                                                                                                   |
-| lon           | float   | No | 经度信息，取值返回-180.0到+180.0， 负值表示西方；                                                                                                                                                                |
-| type          | integer | No | 位置信息的源；值为 1 表示 GPS/定位服务；值为 2 表示 IP 地址； 值为 3 表示用户提供；                                                                                                                                |
-| ~~accuracy~~      | integer | No | 精度，详细到米；当经纬度是通过定位服务获取时，上报该字段；                                                                                                                                                         |
-| ~~lastfix~~       | integer | No | 生成竞价请求的时间和设备最后一次获取地理位置的时间之间的差别，这个时间差的单位：秒 请注意：设备可能缓存多个不同时间获取的地理位置数据。 在理想状况下，这个数值应该是从此竞价请求里包含的地理位置获取时间开始计算的 |
-| ~~ipservice~~    | integer | No | 从IP地址分析地理位置的服务方或者供应商（当type = 2的时候）;                                                                                                                                                        |
-| country       | string  | No | ISO-3166-1 Alpha-3 国家码；                                                                                                                                                                                  |
-| region        | string  | No | ISO-3166-2 区域码；                                                                                                                                                                                              |
-|~~regionfips10~~ | string  | No | 国家的区域，使用FIPS 10-4 notation 编码表示，也可用 ISO 3166-2编码表示；                                                                                                                                       |
-| metro         | string  | No | 谷歌metro code Metro codes 与 Nielsen DMAs 相似，但有一些差异                                                                                                                                                      |
-| city          | string  | No | 城市名称使用联合国贸易与运输位置码                                                                                                                                                                                 |
-| zip           | string  | No | 邮政编码或者邮递区号；                                                                                                                                                                                             |
-|~~utcoffse~~     | integer | No | 本地时间，用比标准UTC时间多加或减少的分钟数来表示；                                                                                                                                                                |
+| lat           | float   | No | Latitude from -90.0 to +90.0, where negative is south.                        |
+| lon           | float   | No | Longitude from -180.0 to +180.0, where negative is west.         |
+| type          | integer | No | Source of location data;where 1= GPS,2= IP address,3= User provided.                                      |
+| ~~accuracy~~      | integer | No | Estimated location accuracy in meters; recommended when lat/lon are specified and derived from a device’s location services (i.e., type = 1). Note that this is the accuracy as reported from the device. Consult OS specific documentation (e.g., Android, iOS) for exact interpretation.      |
+| ~~lastfix~~       | integer | No | Number of seconds since this geolocation fix was established. Note that devices may cache location data across multiple fetches. Ideally, this value should be from the time the actual fix was taken. |
+| ~~ipservice~~    | integer | No | Service or provider used to determine geolocation from IP address if applicable (i.e., type = 2).                 |
+| country       | string  | No | Country code using ISO-3166-1-alpha-3.  |
+| region        | string  | No | Region code using ISO-3166-2; 2-letter state code if USA.   |
+|~~regionfips10~~ | string  | No | Region of a country using FIPS 10-4 notation. While OpenRTB supports this 
+attribute, it has been withdrawn by NIST in 2008.    |
+| metro         | string  | No | [Google metro code](http://code.google.com/apis/adwords/docs/appendix/metrocodes.html); similar to but not exactly Nielsen DMAs. |
+| city          | string  | No | [City using United Nations Code for Trade & Transport Locations](http://www.unece.org/cefact/locode/service/location.htm).|
+| zip           | string  | No | Zip or postal code.|
+|~~utcoffse~~     | integer | No | Local time as the number +/- of minutes from UTC.|
 
 ## Object: Regs
 
 | Attribute | Type    | Required | Description                                                                                                                                  |
 |----------|---------|----------|---------------------------------|
-| coppa    | integer | No | 表示该次展示是否遵从 COPPA 法案， 0-不遵从；1-遵从； 对于遵从 COPPA 法案的展示，DSP 必须保证返回的广告的内容和素材符合 COPPA 广告规定 |
+| coppa    | integer | No | Flag indicating if this request is subject to the COPPA regulations established by the USA FTC, where 0 = no, 1 = yes. |
 
 # 返回接口说明
 
@@ -778,11 +779,11 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
 ## Object: BidResponse
 | Attribute | Type         | Required | Description                                                      |
 |----------|--------------|----------|-----------------------------------------------------------|
-| id       | string;      | Yes | 竞价请求的标识，即请求带的 request id；                   |
-| seatbid  | object array | Yes | 一组 SeatBid 对象， 如果出价，则至少应该填充一个seatbid； |
-| bidid    | string       | No | 竞拍者生成的响应 ID, 辅助日志或者交易追踪；               |
-| cur      | string;      | No | 出价货币单位，使用 ISO-4217 码；不传默认 USD              |
-| nbr      | integer      | No | 不出价原因；                                              |
+| id       | string;      | Yes | ID of the bid request to which this is a response.|
+| seatbid  | object array | Yes | Array of seatbid objects; 1+ required if a bid is to be made. |
+| bidid    | string       | No | Bidder generated response ID to assist with logging/tracking.  |
+| cur      | string;      | No | Bid currency using ISO-4217 alpha codes.Default USD  |
+| nbr      | integer      | No | Reason for not bidding.   |
 
 ## Object: Seatbid
 
