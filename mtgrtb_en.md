@@ -771,10 +771,10 @@ attribute, it has been withdrawn by NIST in 2008.    |
 |----------|---------|----------|---------------------------------|
 | coppa    | integer | No | Flag indicating if this request is subject to the COPPA regulations established by the USA FTC, where 0 = no, 1 = yes. |
 
-# 返回接口说明
+# Response Specification
 
-Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基础上引入了 Mintegral ADX 的一些特殊参数；
-标准协议中的参数如果 Mintegral ADX 不支持，以删除线体现；
+Mintegral’s RTB protocols are based on the IAB’s Open RTB API Specification Version 2.5 with some extra attributes.
+Attributes of the IAB’s specification that are not supported by Mintegral’s ADX are ~~~crossed out~~~.
 
 ## Object: BidResponse
 | Attribute | Type         | Required | Description                                                      |
@@ -796,99 +796,103 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
 ## Object: Bid
 | Attribute       | Type          | Required             | Description                                                                                                                                                      |
 |----------------|---------------|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| id             | string        | Yes | 竞拍者生成的竞价 ID，用于记录日志或行为追踪；                                                                                                             |
-| impid          | string        | Yes | 关联的竞价请求中的 Imp 对象的 ID；                                                                                                                        |
-| price          | float         | Yes | 对该次展示的出价，以 CPM 表示；                                                                                                                           |
-| nurl           | string        | Yes | 胜出通知链接；MTG adx将在广告成功展示时调用该链接；                                                                                                       |
-| burl           | string        | No | 可计费展示回调；                                                                                                                                          |
-| lurl           | string        | No | 竞价失败回调；                                                                                                                                            |
+| id             | string        | Yes | Bidder generated bid ID to assist with logging/tracking.|
+| impid          | string        | Yes | ID of the Imp object in the related bid request.                         |
+| price          | float         | Yes | Bid price expressed as CPM although the actual transaction is for a unit impression only.  |
+| nurl           | string        | Yes | Win notice URL called by the exchange if the bid wins. MTG Adx will call this URL when the ad is successfully demonstrated. |
+| burl           | string        | No | Billing notice URL called by the exchange when a winning bid becomes billable based 
+on exchange-specific business policy.|
+| lurl           | string        | No | Loss notice URL called by the exchange when a bid is known to have been lost.                                                                                            |
 | adm            | string        | Yes | 广告素材标记；Native广告形式返回native response； 视频广告形式返回VAST XML;Banner广告形式返回xhtml；                                                      |
-| adid           | string        | No | 竞价的广告的ID， 如果交易胜出，该广告会被发送给媒体；                                                                                                     |
-| adomain        | string array  | Yes | 广告主域名， 用于过滤检测；                                                                                                                               |
-| bundle         | string        | 是（下载类广告必传） | 应用的包名信息； 安卓包名示例 com.foo.mygame；ios 包名示例907394059；                                                                                     |
-| iurl           | string        | No | 用于质量或者安全监测的表示广告活动内容的图像地址；                                                                                                        |
-| cid            | string        | No | 广告 id，辅助广告审核；iurl 代表的一组素材                                                                                                                |
-| crid           | string        | No | 一组素材的 id；辅助广告审核                                                                                                                               |
-| tactic         | string        | No | 广告投放策略id；                                                                                                                                          |
-| cat            | string array  | Yes | creative 的 IAB 内容Type；枚举值参考附录Content Categories                                                                                                |
-| attr           | integer array | No | Description creative 的属性集合；枚举值参考附录Creative Attributes                                                                                               |
-| api            | integer       | No | 该次展示可支持的 API 框架；枚举值参考附录API Frameworks                                                                                                   |
-| protocols      | integer       | No | 支持的视频竞价响应协议；枚举值参考附录Protocols                                                                                                           |
-| qagmediarating | integer       | Yes | 表示根据 IAB IGQ 标准的素材内容等级； 枚举值参考附录IQG Media Ratings                                                                                     |
-| language       | string        | No | 素材语言；设备语言；使用 ISO-639-1-alpha-2；                                                                                                              |
-| dealid         | string        | No | 如果该竞价从属于某个私有市场交易， 这个参数包含这个私有市场交易的交易ID； 如果竞拍的展示从属于某个私有市场交易， 那么该竞价必须包含相同的私有市场交易的ID |
-| w              | integer       | No | 广告的宽度，单位：像素。                                                                                                                                  |
-| h              | integer       | No | 广告的高度，单位：像素。                                                                                                                                  |
-| wratio         | integer       | No | 广告的相对宽度，单位：像素。                                                                                                                              |
-| hratio         | integer       | No | 广告的相对高度，单位：像素。                                                                                                                              |
-| exp            | integer       | No | 广告从返回到实际展示的有效延迟时间，单位为秒；默认值为 3600；                                                                                             |
-| ext            | object ext       | No | 具体见 ext object                                                                                                                                         |
+| adid           | string        | No | ID of a preloaded ad to be served if the bid wins.                        |
+| adomain        | string array  | Yes | Advertiser domain for block list checking (e.g., “ford.com”).     |
+| bundle         | string        | Yes（For app-install ad） | A platform-specific application identifier intended to be unique to the app and independent. On Android, this should be a bundle or package name (e.g., com.foo.mygame). On iOS, it is a numeric ID(e.g.,907394059).   |
+| iurl           | string        | No | URL without cache-busting to an image that is representative of the content of the campaign 
+for ad quality/safety checking.                           |
+| cid            | string        | No | Campaign ID to assist with ad quality checking; the collection of creatives for which iurl 
+should be representative    |
+| crid           | string        | No | Creative ID to assist with ad quality checking.                                                                      |
+| tactic         | string        | No | Tactic ID to enable buyers to label bids for reporting to the exchange the tactic through which their bid was submitted.  |
+| cat            | string array  | Yes | IAB content categories of the creative. Refer to Appendix [Content Categories](appendix.md#content-categories)     |
+| attr           | integer array | No | Set of attributes describing the creative. Refer to Appendix [Creative Attributes](appendix.md#creative-attributes)  |
+| api            | integer       | No | API required by the markup if applicable. Refer to Appendix [API Frameworks](appendix.md#api-frameworks)|
+| protocols      | integer       | No | Video response protocol of the markup if applicable. Refer to Appendix [Protocols](appendix.md#protocols)  |
+| qagmediarating | integer       | Yes | Creative media rating per IQG guidelines. Refer to Appendix [IQG Media Ratings](appendix.md#iqg-media-ratings) |
+| language       | string        | No | Language of the creative using ISO-639-1-alpha-2.  |
+| dealid         | string        | No | Reference to the deal.id from the bid request if this bid pertains to a private marketplace direct deal. |
+| w              | integer       | No | Width of the creative in device independent pixels (DIPS). |
+| h              | integer       | No | Height of the creative in device independent pixels (DIPS).  |
+| wratio         | integer       | No | Relative width of the creative when expressing size as a ratio.      |
+| hratio         | integer       | No | Relative height of the creative when expressing size as a ratio.                  |
+| exp            | integer       | No | Advisory as to the number of seconds the bidder is willing to wait between the auction and the actual impression. Default value 3600.|
+| ext            | object ext       | No | Please refer to [Object Ext](#object-ext)  |
 
 ## Object: Ext
 
 | Attribute    | Type             | Required | Description                                                     |
 |-------------|------------------|----------|----------------------------------------------------------|
-| imptrackers | string array | No | 展示监测链接数组；Interative必传广告形式的展示监测链接； |
+| imptrackers | string array | No | Impression tracking urls for banner and interative ads ad type. |
 
 ## Object: NativeResponse
 
 | Attribute    | Type             | Required | Description                                                                                                                               |
 |-------------|------------------|----------|------------------------------------------------------------------------------------------------------------------------------------|
-| ver         | string           | No | Native 标签协议的版本                                                                                                              |
-| assets      | array of objects | Yes | Native 广告素材列表；具体见 assets object                                                                                          |
-| link        | object           | Yes | 广告的点击跳转链接；具体见 link object；注意，我们不支持素材单独的点击跳转链接                                                     |
-| imptrackers | strings array    | Yes | 展示监测链接数组；Mintegral ADX 在客户端发生广告展示时调用展示监测 url 上报展示 注意：我们不支持素材自带的 impression pixel 监测； |
-| jstracker   | string           | No | Javascript展示监测代码；                                                                                                           |
+| ver         | string           | No | Version of the Native Markup version in use.  |
+| assets      | array of objects | Yes | List of native ad’s assets.Refer to [Assets Object](#object-asset)                               |
+| link        | object           | Yes | This is default [Link Object](#object-assetlink) for the ad.Refer to link object.Note that we don't support separate 
+click links for the creative.  |
+| imptrackers | strings array    | Yes | Array of impression tracking URLs. Mintegral ADX will callback on these URLs when the ad is demonstrated successfully on the client. Please note that we do not support creative's default impression pixel tracking； |
+| jstracker   | string           | No | Optional JavaScript impression tracker.|
 
 ## Object: Asset
 | 参数     | Type    | Required                            | Description                                                          |
 |----------|---------|-------------------------------------|---------------------------------------------------------------|
-| id       | integer | Yes | Asset 的唯一识别 ID,与 exchange 请求时的 assetid 必须一一对应 |
-| required | integer | No | 是否强制必传；与 exchange 请求时的 asset require字段值一致    |
-| title    | object  | 当请求有该 asset 且要求必传时，必传 | 回传标题信息；具体见 Object Title                             |
-| img      | object  | 当请求有该 asset 且要求必传时，必传 | 回传图片信息；具体见 Object Img                               |
-| video    | object  | 当请求有该 asset 且要求必传时，必传 | 回传视频信息；具体见 Object Video                             |
-| data     | object  | 当请求有该 asset 且要求必传时，必传 | 回传其他数据信息；具体见 Object Data                          |
-| link     | object  | Yes | 链接信息；见Object Link                                       |
+| id       | integer | Yes | Unique asset ID, assigned by exchange, must match one of the asset IDs in request.|
+| required | integer | No | Whether the asset is complusory or not；Must matched with the reuqired attribute of the asset object within the bid request. |
+| title    | object  | Required if the asset is required. | Pleaser refer to [Object Title](#object-assettitle)                             |
+| img      | object  | Required if the asset is required. | Pleaser refer to [Object Img](#object-assetimg)                               |
+| video    | object  | Required if the asset is required. | Pleaser refer to [Object Video](#object-assetvideo)                             |
+| data     | object  | Required if the asset is required. | Pleaser refer to [Object Data](#object-assetdata)                          |
+| link     | object  | Yes | Please refer to [Object Link](#object-assetlink)                                       |
 
 ### Object: Asset.Title
 
 | Attribute | Type   | Required | Description       |
 |----------|--------|----------|------------|
-| text     | String | Yes | 标题文字； |
+| text     | String | Yes | The title's content. |
 
  ### Object: Asset.Img
  
 | Attribute | Type    | Required | Description                   |
 |----------|---------|----------|------------------------|
-| url      | string  | Yes | 图片素材的 url 地址    |
-| w        | integer | Yes | 图片的宽度，单位为像素 |
-| h        | integer | Yes | 图片的高度，单位为像素 | 
+| url      | string  | Yes | Url of the image.   |
+| w        | integer | Yes | Width of the image in pixels. |
+| h        | integer | Yes | Height of the image in pixels. | 
 
 ### Object: Asset.Video
 
 | Attribute | Type   | Required | Description       |
 |----------|--------|----------|------------|
-| vasttag     | string | No | 视频vast xml|
+| vasttag     | string | No | Video's vast xml.|
 
 ### Object: Asset.Data 
 
 | Attribute | Type   | Required | Description       |
 |----------|--------|----------|------------|
-| label     | string | No | Data 对应的名称；若传则严格按照 Data type 表的 name 传值|
-| value     | string | Yes | Data 的具体内容；根据具体每个 data type 的要求返回值|
+| label     | string | No | The label name for the data. Please  若传则严格按照 Data type 表的 name 传值|
+| value     | string | Yes | The data's content value. 根据具体每个 data type 的要求返回值|
 
 ### Object: Asset.Link
 
 | Attribute      | Type             | Required | Description                   |
 |---------------|------------------|----------|------------------------|
-| url           | string           | Yes | 点击跳转 url 地址      |
-| clicktrackers | array of strings | No | 第三方点击监测链接数组 |
-| fallback      | string           | No | 备用点击跳转url        |
+| url           | string           | Yes | URL of the clickable link.     |
+| clicktrackers | array of strings | No | List of third-party tracker URLs to be callback on click of the URL. |
+| fallback      | string           | No | Fallback URL for deeplink.       |
 
 
-# No bidding 说明
+# No bidding
 
-如果DSP不出价，通过返回一个带request id和nbr参数的object 通知 Mintegral ADX；
-nbr即不出价原因的枚举值见附录No-Bid Reason Code
+If DSP does not want to bid, DSP should notify MTG ADX with a object containing a request ID and a nbr;
+nbr is the not-to-bid reason. Please refer to [Appendix No-Bid Reason Codese](appendix.md#no-bid-reason-code)
 
