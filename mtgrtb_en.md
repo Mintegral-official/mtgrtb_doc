@@ -789,9 +789,9 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
 
 | Attribute | Type         | Required | Description                                                                                                   |
 |----------|--------------|----------|--------------------------------------------------------------------------------------------------------|
-| bid      | object array | Yes | 至少一个 Bid 对象的数组，每个对象关联一个展示。                                                        |
-| seat     | string       | No | 出价者席位标识， 代表本次出价的出价人；                                                                |
-| group    | integer      | No | 1 = 出价方要求对所有展示的出价必须整组胜出，或失败; 0 = 对某一展示的一次出价可以独立胜出，默认值 = 0 ; |
+| bid      | object array | Yes | Array of 1+ [Bid objects](#object-bid) each related to an impression. Multiple bids can relate to the same impression.  |
+| seat     | string       | No | ID of the buyer seat (e.g., advertiser, agency) on whose behalf this bid is made.              |
+| group    | integer      | No | 0 = impressions can be won individually; 1 = impressions must be won or lost as a group. Default 0;|
 
 ## Object: Bid
 | Attribute       | Type          | Required             | Description                                                                                                                                                      |
