@@ -794,7 +794,7 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
 |----------------|---------------|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | id             | string        | 是                   | 竞拍者生成的竞价 ID，用于记录日志或行为追踪；                                                                                                             |
 | impid          | string        | 是                   | 关联的竞价请求中的 Imp 对象的 ID；                                                                                                                        |
-| price          | float         | 是                   | 对该次展示的出价，以 CPM 表示；                                                                                                                           |
+| price          | float         | 是                   | 对该次展示的出价，以 CPM 表示, 默认美元；                                                                                                                           |
 | nurl           | string        | 是                   | 胜出通知链接；MTG adx将在广告成功展示时调用该链接；                                                                                                       |
 | burl           | string        | 否                   | 可计费展示回调；                                                                                                                                          |
 | lurl           | string        | 否                   | 竞价失败回调；                                                                                                                                            |
@@ -824,7 +824,8 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
 
 | 参数名称    | 类型             | 是否必传 | 描述                                                     |
 |-------------|------------------|----------|----------------------------------------------------------|
-| imptrackers | string array | 否       | 展示监测链接数组；Interative必传广告形式的展示监测链接； |
+| imptrackers | string array | 否       | 展示监测链接数组；Banner类型可支持使用这个字段和clicktrackers进行上报|
+| clicktrackers | string array | 否       | 点击监测 链接数组； |
 
 ## Object: NativeResponse
 
@@ -885,6 +886,5 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
 
 # No bidding 说明
 
-如果DSP不出价，通过返回一个带request id和nbr参数的object 通知 Mintegral ADX；
-nbr即不出价原因的枚举值见附录No-Bid Reason Code
+如果DSP不出价，HTTP状态码需要是204
 
