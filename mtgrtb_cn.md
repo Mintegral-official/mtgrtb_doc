@@ -742,6 +742,7 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
 | ifa            | string  | 否       | 广告主标识， 明文表示； Ios 传 idfa，必传； Android 国外传 gaid，国内不传；                                                                                       |
 | imei           | string  | 否       | 硬件设备 ID，安卓传 IMEI                                                                                                                                          |
 | android_id     | string  | 否       | 设备平台 ID，安卓传 Android ID                                                                                                                                    |
+| oaid     | string  | 否       | OAID                                                                                                                                   |
 | didsha1        | string  |          | 硬件设备 ID，安卓传 IMEI，使用 SHA1 哈希算法；                                                                                                                    |
 | didmd5         | string  |          | 硬件设备 ID，安卓传 IMEI，使用 md5 哈希算法；                                                                                                                     |
 | dpidsha1       | string  |          | 设备平台 ID，安卓传 Android ID，使用 SHA1 哈希算法；                                                                                                              |
