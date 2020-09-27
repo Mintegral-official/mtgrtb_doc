@@ -574,7 +574,7 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
 |~~topfram~~|	integer	|否|	banner是在顶层frame中而不是iframe中，0-不是; 1-是|
 |~~expdir~~|	integer array	|否|	banner可以扩展的方向，参考表附录Expandable Direction|
 |api|	integer array	|否|	该次展示可支持的 API 框架；枚举值释义参考附录API Frameworks；该字段缺省表示所有枚举值均不支持|
-|~~vcm~~|	integer	|否|	当banner object作为video object的伴随广告时，标识伴随广告的渲染模式；0-concurrent, 1-endcard|
+|~~vcm~~|	integer	|否|	当banner object作为video objecthttp://dev.mintegral.com/doc/adx/cn/#frc12_1的伴随广告时，标识伴随广告的渲染模式；0-concurrent, 1-endcard|
 
 ### Object: Video
 
@@ -607,6 +607,10 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
 |companiontype	|integer array	|否|	支持的 VAST companion广告类型；如果在companionad 中填充了 Banner 对象则推荐使用；枚举值参考附录Companion Types|
 |ext	|object|	否|	见Object：ext|
 
+## Object:Ext
+| 参数名称	| 类型 |	是否必传	| 描述 |
+|---|---|---|---|
+|is_rewarded | bool | 否 | 是否是激励视频 |
 
 ## Object: Native
 
