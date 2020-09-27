@@ -19,8 +19,8 @@
     + [Native image Response](#native-image-response)
     + [Native video Response](#native-video-response)
   * [请求接口说明](#请求接口说明)
-    + [Object：BidRequest](#objectbidrequest)
-    + [Object：Imp](#objectimp)
+    + [Object: BidRequest](#objectbidrequest)
+    + [Object: Imp](#objectimp)
     + [Object: Banner](#object-banner)
     + [Object: Video](#object-video)
   * [Object: Native](#object-native)
@@ -514,7 +514,7 @@ vast 中的链接内容，都需要使用CDATA。
 Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基础上引入了 Mintegral ADX 的一些特殊参数；
 标准协议中的参数如果 Mintegral ADX 不支持，以删除线体现；
 
-### Object：BidRequest
+### Object: BidRequest
 
 |  参数名称            | 类型|           是否必传|   描述|
 |---|---|---|---|
@@ -538,7 +538,7 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
  | ~~source~~|  object|   否 |   ~~流量来源信息~~ |
  | regs    | object  |  否 |     政策法规要求；具体见[Object Regs](#object-regs) |
 
-### Object：Imp
+### Object: Imp
 
 | 参数名称	| 类型 |	是否必传	| 描述 |
 | ---|---|---|---|

@@ -610,6 +610,10 @@ Standard attributes from IAB open RTB that are not supported by Mintegral ADX ar
 |companiontype	|integer array	|No|	Supported VAST companion ad types. Recommended if companion Banner objects are included via the companionad array. If one of these banners will be rendered as an end-card, this can be specified using the vcm attribute with the particular banner. Refer to List Companion Types|
 |ext	|object|	No|	Refer to [Object：ext](#object-ext)|
 
+## Object:Ext
+| Attribute	| Type |	Required	| Description |
+|---|---|---|---|
+|is_rewarded | bool | No | is the video request is rewarded |
 
 ## Object: Native
 
@@ -741,6 +745,7 @@ Standard attributes from IAB open RTB that are not supported by Mintegral ADX ar
 | ifa            | string  | No | ID sanctioned for advertiser use in the clear.(i.e., not hashed). For IOS, this attribute shoube the idfa, and it is a required attribute. For Android, this attribute should be the gaid, it is only required for developers outside mainland China.|
 | imei           | string  | No | Hardware device ID,IMEI                                                                                            |
 | android_id     | string  | No | Platform device ID,Android ID                                                                                         |
+| oaid     | string  | No | Platform device ID, OAID                                                                                         |
 | didsha1        | string  |          | Hardware device ID (e.g., IMEI); hashed via SHA1.                                                                 |
 | didmd5         | string  |          | Hardware device ID (e.g., IMEI); hashed via MD5.                                                        |
 | dpidsha1       | string  |          | Platform device ID (e.g., Android ID); hashed via SHA1.                                                           |
