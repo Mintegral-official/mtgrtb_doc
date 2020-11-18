@@ -1,6 +1,6 @@
-- [Mintegral Adx对接文档](#mintegral-adx对接文档)
-  * [nurl和展示监测链接说明](#nURL-and-Impression-Tracking-URLs)
-    + [展示监测链接返回说明](#About-impression-tracking-URL)
+- [Mintegral Adx Doc](#mintegral-adx-doc)
+  * [nURL and Impression Tracking URLs](#nURL-and-Impression-Tracking-URLs)
+    + [About impression tracking URL](#About-impression-tracking-URL)
   * [nURL Macro Substitution](#nURL-Macro-Substitution)
   * [About Billing](#About-Billing)
   * [About COPPA](#About-COPPA)
@@ -50,7 +50,7 @@
 - [No bidding 说明](#no-bidding-说明)
 
 
-# Mintegral Adx对接文档
+# Mintegral Adx Doc
 
 ## nURL and Impression Tracking URLs
 
@@ -119,11 +119,11 @@ MTG ADX supports the following video templates：
 
 |Image|Description|
 |---|----|
-|<img src="v1.jpg" width="500px" alt="视频居中播放 背景黑屏"/>|V1 Video centered with black background|
-|<img src="v2.jpg" width="500px" alt="视频居中播放 毛玻璃背景"/>|V2 Video centered with Gaussian Blur|
-|<img src="v3.jpg" width="500px" alt="上方显示视频 下方显示卡片"/>|V3 Video on top with info-card at bottom|
-|<img src="v4.jpg" width="500px" alt="上方显示视频 下方显示卡片"/>|V4 Video on top with storekit at bottom|
-|<img src="v5.jpg" width="500px" alt="中间视频 上下卡片"/>|V8 Video in the middle of two info-cards|
+|<img src="v1.jpg" width="500px" alt="Video centered with black background"/>|V1 Video centered with black background|
+|<img src="v2.jpg" width="500px" alt="Video centered with Gaussian Blur"/>|V2 Video centered with Gaussian Blur|
+|<img src="v3.jpg" width="500px" alt="Video on top with info-card at bottom"/>|V3 Video on top with info-card at bottom|
+|<img src="v4.jpg" width="500px" alt="Video on top with storekit at bottom"/>|V4 Video on top with storekit at bottom|
+|<img src="v5.jpg" width="500px" alt="Video in the middle of two info-cards"/>|V8 Video in the middle of two info-cards|
 
 
 ## How to Use Video Template
@@ -547,10 +547,10 @@ Standard attributes from IAB open RTB that are not supported by Mintegral ADX ar
 | ---|---|---|---|
 |id	|string|	Yes| A unique identifier for this impression within the context of the bid request; On Mintegral ADX, one request only sells one impression.|
 |~~metric~~	|object array |	No|	An array of Metric object|
-|banner	|object Banner	 |Banner流量必传|	Refer to [Object Banner](#object-banner)|
-|video	|object	Video |Video 流量必传|	Refer to [Object Video](#object-video)|
-|audio	|object	|Audio流量必传|	Object Audio|
-|native	|object Native	|Native流量必传|	Refer to [Object Native](#object-native)|
+|banner	|object Banner	 |Banner required|	Refer to [Object Banner](#object-banner)|
+|video	|object	Video |Video required|	Refer to [Object Video](#object-video)|
+|audio	|object	|Audio required|	Object Audio|
+|native	|object Native	|Native required|	Refer to [Object Native](#object-native)|
 |~~pmp~~	|object	|No|	A Pmp object containing any private marketplace deals in effect for this impression.|
 |~~displaymanager~~	|string|	No|	Name of ad mediation partner, SDK technology, or player responsible for rendering ad (typically video or mobile). Used by some ad servers to customize ad code by partner. Recommended for video and/or apps.|
 |~~displaymanagerver~~	|string	|No|	Version of ad mediation partner, SDK technology, or player responsible for rendering ad (typically video or mobile). Used by some ad servers to customize ad code by partner. Recommended for video and/or apps.|
@@ -610,6 +610,10 @@ Standard attributes from IAB open RTB that are not supported by Mintegral ADX ar
 |companiontype	|integer array	|No|	Supported VAST companion ad types. Recommended if companion Banner objects are included via the companionad array. If one of these banners will be rendered as an end-card, this can be specified using the vcm attribute with the particular banner. Refer to List Companion Types|
 |ext	|object|	No|	Refer to [Object：ext](#object-ext)|
 
+## Object:Ext
+| Attribute	| Type |	Required	| Description |
+|---|---|---|---|
+|is_rewarded | bool | No | is the video request is rewarded |
 
 ## Object: Native
 
@@ -672,9 +676,9 @@ Standard attributes from IAB open RTB that are not supported by Mintegral ADX ar
 | Type ID | Name       | Description | Required Type             |
 |---------|------------|--------------------------------------------------------------|----------------------------|
 | 1       | ~~sponsored~~  | Sponsor Name is required.                           | text                       |
-| 2       | desc       | 表示返回需要带上对推广产品或服务的Description；                     | text                       |
-| 3       | rating     | 表示返回需要带上产品的评分，比如 App store 0-5 的 APP 评分； | number formatted as string |
-| 4       | likes      | 表示返回需要带上产品的点赞数量；                             | number formatted as string |
+| 2       | desc       | Descriptions are required                     | text                       |
+| 3       | rating     | Rating of the product. For example an app's rating in app store from 0-5 |number formatted as string |
+| 4       | likes      |                              | number formatted as string |
 | 5       | ~~downloads~~  | 表示返回需要带上产品的下载/安装数量；                        | number formatted as string |
 | 6       | price      | 表示返回需要带上产品的价格，值需要带上货币符号；             | number formatted as string |
 | 7       | ~~saleprice~~  | 表示返回需要带上产品的促销价格，值需要带上货币符号；         | number formatted as string |
@@ -741,6 +745,7 @@ Standard attributes from IAB open RTB that are not supported by Mintegral ADX ar
 | ifa            | string  | No | ID sanctioned for advertiser use in the clear.(i.e., not hashed). For IOS, this attribute shoube the idfa, and it is a required attribute. For Android, this attribute should be the gaid, it is only required for developers outside mainland China.|
 | imei           | string  | No | Hardware device ID,IMEI                                                                                            |
 | android_id     | string  | No | Platform device ID,Android ID                                                                                         |
+| oaid     | string  | No | Platform device ID, OAID                                                                                         |
 | didsha1        | string  |          | Hardware device ID (e.g., IMEI); hashed via SHA1.                                                                 |
 | didmd5         | string  |          | Hardware device ID (e.g., IMEI); hashed via MD5.                                                        |
 | dpidsha1       | string  |          | Platform device ID (e.g., Android ID); hashed via SHA1.                                                           |

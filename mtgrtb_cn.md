@@ -19,8 +19,8 @@
     + [Native image Response](#native-image-response)
     + [Native video Response](#native-video-response)
   * [请求接口说明](#请求接口说明)
-    + [Object：BidRequest](#objectbidrequest)
-    + [Object：Imp](#objectimp)
+    + [Object: BidRequest](#objectbidrequest)
+    + [Object: Imp](#objectimp)
     + [Object: Banner](#object-banner)
     + [Object: Video](#object-video)
   * [Object: Native](#object-native)
@@ -102,6 +102,7 @@ Mintegral ADX目前的广告形式包括：
 * 原生视频 Native Video
 * 原生图片 Native Image
 
+<!--
 ## 视频模板说明(可选)
 
 Rewarded video 和 Interstitial video 可支持多种视频模板，建议 DSP 可从中选择效果最优的模板进行投放；
@@ -170,6 +171,7 @@ MTG ADX现阶段支持的模板如下：
 |4|	v4-上方显示视频 下方显示storekit |/|/| 	/|	/|	/|	ios示例:907394059 |
 |8|	v8-中间视频 上下卡片|	字数15字符以内|	字数30字符以内|	宽高比1:1|	字数5字符以内	|(非强制)	|/ |
 
+-->
 
 ## VAST说明
 
@@ -514,7 +516,7 @@ vast 中的链接内容，都需要使用CDATA。
 Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基础上引入了 Mintegral ADX 的一些特殊参数；
 标准协议中的参数如果 Mintegral ADX 不支持，以删除线体现；
 
-### Object：BidRequest
+### Object: BidRequest
 
 |  参数名称            | 类型|           是否必传|   描述|
 |---|---|---|---|
@@ -538,7 +540,7 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
  | ~~source~~|  object|   否 |   ~~流量来源信息~~ |
  | regs    | object  |  否 |     政策法规要求；具体见[Object Regs](#object-regs) |
 
-### Object：Imp
+### Object: Imp
 
 | 参数名称	| 类型 |	是否必传	| 描述 |
 | ---|---|---|---|
@@ -574,7 +576,7 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
 |~~topfram~~|	integer	|否|	banner是在顶层frame中而不是iframe中，0-不是; 1-是|
 |~~expdir~~|	integer array	|否|	banner可以扩展的方向，参考表附录Expandable Direction|
 |api|	integer array	|否|	该次展示可支持的 API 框架；枚举值释义参考附录API Frameworks；该字段缺省表示所有枚举值均不支持|
-|~~vcm~~|	integer	|否|	当banner object作为video object的伴随广告时，标识伴随广告的渲染模式；0-concurrent, 1-endcard|
+|~~vcm~~|	integer	|否|	当banner object作为video objecthttp://dev.mintegral.com/doc/adx/cn/#frc12_1的伴随广告时，标识伴随广告的渲染模式；0-concurrent, 1-endcard|
 
 ### Object: Video
 
@@ -607,6 +609,10 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
 |companiontype	|integer array	|否|	支持的 VAST companion广告类型；如果在companionad 中填充了 Banner 对象则推荐使用；枚举值参考附录Companion Types|
 |ext	|object|	否|	见Object：ext|
 
+## Object:Ext
+| 参数名称	| 类型 |	是否必传	| 描述 |
+|---|---|---|---|
+|is_rewarded | bool | 否 | 是否是激励视频 |
 
 ## Object: Native
 
@@ -738,6 +744,7 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
 | ifa            | string  | 否       | 广告主标识， 明文表示； Ios 传 idfa，必传； Android 国外传 gaid，国内不传；                                                                                       |
 | imei           | string  | 否       | 硬件设备 ID，安卓传 IMEI                                                                                                                                          |
 | android_id     | string  | 否       | 设备平台 ID，安卓传 Android ID                                                                                                                                    |
+| oaid     | string  | 否       | OAID                                                                                                                                   |
 | didsha1        | string  |          | 硬件设备 ID，安卓传 IMEI，使用 SHA1 哈希算法；                                                                                                                    |
 | didmd5         | string  |          | 硬件设备 ID，安卓传 IMEI，使用 md5 哈希算法；                                                                                                                     |
 | dpidsha1       | string  |          | 设备平台 ID，安卓传 Android ID，使用 SHA1 哈希算法；                                                                                                              |
@@ -794,7 +801,7 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
 |----------------|---------------|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | id             | string        | 是                   | 竞拍者生成的竞价 ID，用于记录日志或行为追踪；                                                                                                             |
 | impid          | string        | 是                   | 关联的竞价请求中的 Imp 对象的 ID；                                                                                                                        |
-| price          | float         | 是                   | 对该次展示的出价，以 CPM 表示；                                                                                                                           |
+| price          | float         | 是                   | 对该次展示的出价，以 CPM 表示, 默认美元；                                                                                                                           |
 | nurl           | string        | 是                   | 胜出通知链接；MTG adx将在广告成功展示时调用该链接；                                                                                                       |
 | burl           | string        | 否                   | 可计费展示回调；                                                                                                                                          |
 | lurl           | string        | 否                   | 竞价失败回调；                                                                                                                                            |
@@ -824,7 +831,8 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
 
 | 参数名称    | 类型             | 是否必传 | 描述                                                     |
 |-------------|------------------|----------|----------------------------------------------------------|
-| imptrackers | string array | 否       | 展示监测链接数组；Interative必传广告形式的展示监测链接； |
+| imptrackers | string array | 否       | 展示监测链接数组；Banner类型可支持使用这个字段和clicktrackers进行上报|
+| clicktrackers | string array | 否       | 点击监测 链接数组； |
 
 ## Object: NativeResponse
 
@@ -885,6 +893,5 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
 
 # No bidding 说明
 
-如果DSP不出价，通过返回一个带request id和nbr参数的object 通知 Mintegral ADX；
-nbr即不出价原因的枚举值见附录No-Bid Reason Code
+如果DSP不出价，HTTP状态码需要是204
 
