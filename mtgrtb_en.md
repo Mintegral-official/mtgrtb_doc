@@ -655,9 +655,9 @@ Standard attributes from IAB open RTB that are not supported by Mintegral ADX ar
 |----------|------------------|-----------------------|---------------------|
 | type     | integer          | No | Type of the image: 1-icon；2-logo(brand)；3-large picture|
 | w        | integer          | No | Exact width in device independent pixels (DIPS);                          |
-| ~~wmin~~ | integer          | No | Minimum width in device independent pixels (DIPS).                       |
+| wmin | integer          | No | Minimum width in device independent pixels (DIPS).                       |
 | h        | integer          | Exact height in device independent pixels (DIPS)|                                                    |
-| ~~hmin~~ | integer          | No | Minimum height in device independent pixels (DIPS).                          |
+| hmin | integer          | No | Minimum height in device independent pixels (DIPS).                          |
 | mimes    | array of strings | No | Content MIME types supported. Popular MIME types may include “application/javascript”, “image/jpg”, “image/gif”.                        |
 
 ## Object: Data

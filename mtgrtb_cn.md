@@ -652,9 +652,9 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
 |----------|------------------|-----------------------|---------------------|
 | type     | integer          | 否                        | 表示具体的图片类型，图片类型以及对应的枚举值如下： 1-icon；2-logo(针对 brand)；3-大图|
 | w        | integer          | 否                        | 图片宽度要求，单位pixel；                          |
-| ~~wmin~~ | integer          | 否                        | 最小宽度要求，单位pixel；                          |
+| wmin | integer          | 否                        | 最小宽度要求，单位pixel；                          |
 | h        | integer          | 图片高度要求，单位pixel； |                                                    |
-| ~~hmin~~ | integer          | 否                        | 最小高度要求，单位pixel；                          |
+| hmin | integer          | 否                        | 最小高度要求，单位pixel；                          |
 | mimes    | array of strings | 否                        | 支持的图片 mime-type；包括但不仅限于“application/javascript”, “image/jpg”, “image/gif”；                             |
 
 ## Object: Data
