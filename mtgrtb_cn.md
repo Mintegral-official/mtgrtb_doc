@@ -560,6 +560,12 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
 |secure|	integer	|是|	标识展示请求是否需要使用HTTPS，默认0, 0-标识不需要使用安全链路； 1-标识需要使用安全链路|
 |~~iframebuster~~|	string array	|否	|特定交易支持的iframe buster的名字数组|
 |~~exp~~|	integer	|否|	建议广告展示有效时间窗口|
+|ext	|object|	否|	见Object：ext(imp)|
+
+## Object:Ext(imp)
+| Attribute	| Type |	Required	| Description |
+|---|---|---|---|
+|deeplink | int | No | 请求是否支持deeplink |
 
 ### Object: Banner
 
@@ -613,6 +619,7 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
 | 参数名称	| 类型 |	是否必传	| 描述 |
 |---|---|---|---|
 |is_rewarded | bool | 否 | 是否是激励视频 |
+|deeplink | int | 否 | 是否支持返回deeplink (1:true) |
 
 ## Object: Native
 
@@ -833,6 +840,8 @@ Mintegral RTB 协议是基于 IAB open RTB 2.5 版本的标准协议，在此基
 |-------------|------------------|----------|----------------------------------------------------------|
 | imptrackers | string array | 否       | 展示监测链接数组；Banner类型可支持使用这个字段和clicktrackers进行上报|
 | clicktrackers | string array | 否       | 点击监测 链接数组； |
+| deeplink | string  | No | 返回的 deeplink  |
+| deeplinkfallbackurl | string  | No | 返回的deeplink fallback 链接， deeplink拉起失败时调用 |
 
 ## Object: NativeResponse
 

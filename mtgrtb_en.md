@@ -561,6 +561,12 @@ Standard attributes from IAB open RTB that are not supported by Mintegral ADX ar
 |secure|	integer	|Yes|	Flag to indicate if the impression requires secure HTTPS URL creative assets and markup, where 0 = non-secure, 1 = secure.|
 |~~iframebuster~~| string array | No|	Array of exchange\-specific names of supported iframe busters.|
 |~~exp~~|	integer	|No|	Advisory as to the number of seconds that may elapse between the auction and the actual impression.|
+| ext	|object|	No|	Refer to Object：ext(imp)|
+
+## Object:Ext(imp)
+| Attribute	| Type |	Required	| Description |
+|---|---|---|---|
+|deeplink | int | No | is the request supports deeplink |
 
 ### Object: Banner
 
@@ -837,6 +843,8 @@ should be representative    |
 | Attribute    | Type             | Required | Description                                                     |
 |-------------|------------------|----------|----------------------------------------------------------|
 | imptrackers | string array | No | Impression tracking urls for banner and interative ads ad type. |
+| deeplink | string  | No | deeplink url in response |
+| deeplinkfallbackurl | string  | No | deeplink fallback url |
 
 ## Object: NativeResponse
 
